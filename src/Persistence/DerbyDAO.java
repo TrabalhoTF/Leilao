@@ -30,10 +30,10 @@ abstract class DerbyDAO implements DAO{
 	public static boolean executeSQL(String sql){
 		try{
 			sql = sql.toUpperCase();
-		PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
+			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
 			if(sql.contains("CREATE") || sql.contains("UPDATE") ||
-			   sql.contains("INSERT") || sql.contains("DROP")   ||
-			   sql.contains("DELETE") || sql.contains("ALTER")){
+					sql.contains("INSERT") || sql.contains("DROP")   ||
+					sql.contains("DELETE") || sql.contains("ALTER")){
 				ps.execute();
 				System.out.println("Comando executado com sucesso!");
 				ps.close();
@@ -43,8 +43,6 @@ abstract class DerbyDAO implements DAO{
 				ResultSet rs = ps.getResultSet();
 				int row = 0;
 				while(rs.next()){
-					System.out.println(rs.getString(1));
-					System.out.println(rs.getRow());
 					row++;
 				}			
 				System.out.println("Sua query retornou "+row+" tupla(s).");
@@ -57,7 +55,7 @@ abstract class DerbyDAO implements DAO{
 		}		
 		return true;
 	}
-	
+
 	public static boolean reestartDb(){
 		try{
 			PreparedStatement ps = null;
@@ -70,12 +68,12 @@ abstract class DerbyDAO implements DAO{
 			sql.add("DELETE FROM PRODUTO");
 			int a = 0;
 			for(String s : sql){
-				 ps = DerbyDAO.getConnection().prepareStatement(sql.get(a++));
+				ps = DerbyDAO.getConnection().prepareStatement(sql.get(a++));
 				ps.execute();				
 			}		
-				ps.execute();				
-				System.out.println("Banco reiciniado");
-				ps.close();				
+			ps.execute();				
+			System.out.println("Banco reiciniado");
+			ps.close();				
 		}catch(SQLException e ){
 			System.out.println("Temos o seguinte erro: "+e.getMessage());
 			return false;
@@ -83,7 +81,7 @@ abstract class DerbyDAO implements DAO{
 		return true;
 	}	
 
-	public boolean addUser(Usuario usr){	
+	public boolean add(Object usr){	
 
 		System.out.println("** inserido com sucesso!");
 		return true;
@@ -134,5 +132,5 @@ abstract class DerbyDAO implements DAO{
 		}
 		return true;
 	}
- 
+
 }
