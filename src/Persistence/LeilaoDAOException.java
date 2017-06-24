@@ -1,4 +1,4 @@
-package persistence;
+package Persistence;
 
 public class LeilaoDAOException extends Exception {
 

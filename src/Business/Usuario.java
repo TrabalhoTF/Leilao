@@ -1,4 +1,4 @@
-package business;
+package Business;
 
 public class Usuario { 
 	private String nome, email, cnpj_cpf;

@@ -1,15 +1,15 @@
-package business;
+package Business;
 
-import persistence.LeilaoDAOBD;
+import Persistence.LeilaoDAO;
 
 public class LeilaoFachada { 
 	
-	private LeilaoDAOBD leilaoDao; 
+	private LeilaoDAO leilaoDao; 
 	private Usuario usuario;
 	
 	public LeilaoFachada() throws LeilaoException {		
 				
-        leilaoDao = new LeilaoDAOBD();
+        LeilaoDAO ld = new LeilaoDAO();
     }
 	
 	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException {

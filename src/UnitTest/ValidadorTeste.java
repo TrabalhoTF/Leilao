@@ -1,11 +1,10 @@
-package unitTest;
+package UnitTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import business.ValidadorDados;
+import Business.ValidadorDados;
 
 public class ValidadorTeste {
 

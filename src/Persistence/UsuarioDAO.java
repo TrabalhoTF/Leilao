@@ -15,7 +15,7 @@ public class UsuarioDAO extends DerbyDAO{
 			String sql = "INSERT INTO USUARIOS VALUES(?,?,?)";
 			PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
 
-			ps.setNString(1, ((Usuario) usr).getCpf_cnpj());
+			ps.setNString(1, ((Usuario) usr).getCnpj_cpf());
 			ps.setString(2, ((Usuario) usr).getNome());
 			ps.setString(3, ((Usuario) usr).getEmail());		
 
@@ -33,7 +33,7 @@ public class UsuarioDAO extends DerbyDAO{
 	public Object getById(String id){
 		for(Object i : this.getContentTable() ){
 			System.out.println(this.getContentTable().get(1));
-			if(((Usuario)i).getCpf_cnpj().equals(id)){
+			if(((Usuario)i).getCnpj_cpf().equals(id)){
 				Usuario usuRetur = (Usuario) i;
 				return i;		
 			}			

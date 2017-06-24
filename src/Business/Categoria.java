@@ -1,4 +1,4 @@
-package business;
+package Business;
 /**
 *
 * @author João França

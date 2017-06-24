@@ -1,4 +1,4 @@
-package business;
+package Business;
 
 public class Lance {
 	private String id_leilao, id_usuario, data, hora;

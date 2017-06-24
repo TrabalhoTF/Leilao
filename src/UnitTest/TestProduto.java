@@ -1,11 +1,12 @@
-package unitTest;
+package UnitTest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
-import business.Categoria;
-import business.Produto;
+import Business.Categoria;
+import Business.Produto;
 
 public class TestProduto {
 	private Produto produto;
