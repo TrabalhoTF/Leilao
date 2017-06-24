@@ -106,6 +106,6 @@ abstract class DerbyDAO implements DAO{
 
 
 	public static void main(String[] args) throws SQLException {
-		DerbyDAO.consultarTabelas("");
+		DerbyDAO.consultarTabelas("SELECT * FROM LOTE");
 	}  
 }

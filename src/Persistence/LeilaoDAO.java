@@ -1,11 +1,6 @@
-package Persistence;
+package Business;
 
-public class LeilaoDAO extends DerbyDAO{
-
-	@Override
-	public boolean addUser(Object usr) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+public interface LeilaoDAO  {
+	// metodos abstrados para inserir e recuperar leilões do BD
 
 }
