@@ -5,5 +5,11 @@ package View;
 */
 public class Fachada {
 	
+	// view comentada
+
+	public void name() {
+		
+	}
+	
 
 }
