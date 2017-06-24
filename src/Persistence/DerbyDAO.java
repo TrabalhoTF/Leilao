@@ -27,30 +27,61 @@ abstract class DerbyDAO implements DAO{
 		return DriverManager.getConnection("jdbc:derby:derbyDB");
 	}
 
-	public static boolean consultarTabelas(String sql){		
-		if(sql.contains("update") || sql.contains("insert") || sql.contains("drop") || sql.contains("delete")){
-			System.out.println("Permitido somente consultas!");
-			return false;
-		}
-		else{
-
-			try{
-				PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
+	public static boolean executeSQL(String sql){
+		try{
+			sql = sql.toUpperCase();
+		PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
+			if(sql.contains("CREATE") || sql.contains("UPDATE") ||
+			   sql.contains("INSERT") || sql.contains("DROP")   ||
+			   sql.contains("DELETE") || sql.contains("ALTER")){
+				ps.execute();
+				System.out.println("Comando executado com sucesso!");
+				ps.close();
+			}
+			else{
 				ps.executeQuery();
 				ResultSet rs = ps.getResultSet();
 				int row = 0;
 				while(rs.next()){
-					System.out.println((row++)+":"+rs.getRow());
+					System.out.println(rs.getString(1));
+					System.out.println(rs.getRow());
+					row++;
 				}			
+				System.out.println("Sua query retornou "+row+" tupla(s).");
 				rs.close();
 				ps.close();	
-			}catch(SQLException e ){
-				e.printStackTrace();
-				return false;
-			}		
-			return true;
-		}
+			}
+		}catch(SQLException e ){
+			System.out.println("Teu SQL ta com o seguinte erro: "+e.getMessage());
+			return false;
+		}		
+		return true;
 	}
+	
+	public static boolean reestartDb(){
+		try{
+			PreparedStatement ps = null;
+			ArrayList<String> sql= new ArrayList<>();
+			sql.add("DELETE FROM LOTEXPRODUTO");
+			sql.add("DELETE FROM LANCE");
+			sql.add("DELETE FROM USUARIO");
+			sql.add("DELETE FROM LOTE");
+			sql.add("DELETE FROM LEILAO");
+			sql.add("DELETE FROM PRODUTO");
+			int a = 0;
+			for(String s : sql){
+				 ps = DerbyDAO.getConnection().prepareStatement(sql.get(a++));
+				ps.execute();				
+			}		
+				ps.execute();				
+				System.out.println("Banco reiciniado");
+				ps.close();				
+		}catch(SQLException e ){
+			System.out.println("Temos o seguinte erro: "+e.getMessage());
+			return false;
+		}
+		return true;
+	}	
 
 	public boolean addUser(Usuario usr){	
 
@@ -104,8 +135,10 @@ abstract class DerbyDAO implements DAO{
 		return true;
 	}
 
-
 	public static void main(String[] args) throws SQLException {
-		DerbyDAO.consultarTabelas("SELECT * FROM LOTE");
+		//String sql = "CREATE TABLE LOTEXPRODUTO(ID_LOTEXPROD INT NOT NULL PRIMARY KEY,ID_LOTE INT NOT NULL,ID_PRODUTO INT NOT NULL,CONSTRAINT FK_LOTE FOREIGN KEY (ID_LOTE) REFERENCES LOTE(ID_LOTE),CONSTRAINT FK_PROD FOREIGN KEY (ID_PRODUTO) REFERENCES PRODUTO(ID_PRODUTO))";
+		//DerbyDAO.executeSQL(sql);
+		//DerbyDAO.reestartDb();
+
 	}  
 }

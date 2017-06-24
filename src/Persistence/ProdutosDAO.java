@@ -1,6 +1,9 @@
-package Business;
+package Persistence;
 
 import java.util.ArrayList;
+
+import Business.LeilaoException;
+import Business.Produto;
  
 public interface ProdutosDAO {   
 	
