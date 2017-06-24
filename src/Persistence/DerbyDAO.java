@@ -134,11 +134,5 @@ abstract class DerbyDAO implements DAO{
 		}
 		return true;
 	}
-
-	public static void main(String[] args) throws SQLException {
-		//String sql = "CREATE TABLE LOTEXPRODUTO(ID_LOTEXPROD INT NOT NULL PRIMARY KEY,ID_LOTE INT NOT NULL,ID_PRODUTO INT NOT NULL,CONSTRAINT FK_LOTE FOREIGN KEY (ID_LOTE) REFERENCES LOTE(ID_LOTE),CONSTRAINT FK_PROD FOREIGN KEY (ID_PRODUTO) REFERENCES PRODUTO(ID_PRODUTO))";
-		//DerbyDAO.executeSQL(sql);
-		//DerbyDAO.reestartDb();
-
-	}  
+ 
 }
