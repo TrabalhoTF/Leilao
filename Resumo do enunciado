@@ -1,0 +1,67 @@
+Leião – 2 tipos:
+usuário vencedor ?????
+natureza (oferta ou demanda) 
+forma de lances (aberto ou fechado). 
+data/hora de início
+data/hora de término (a partir da qual não são mais aceitos lances). 
+identificação do usuário vendedor (no caso de leilões de demanda) ou comprador (no caso de leilões de oferta). 
+preço (mínimo ou máximo) associado ao lote.
+Lance
+
+Status
+ • Aberto. A qualquer momento é possível verificar o valor de todos os lances já gerados e qual o lance vencedor no momento. 
+• Fechado. Não é possível saber os lances já realizados. Apenas ao final do leilão os valores são tornados públicos. Ao ser criado um leilão no sistema, deve ser indicado qual a natureza (oferta ou demanda) e qual a forma de lances (aberto ou fechado). Também é necessário informar data/hora de início (a partir da qual são aceitos lances) e término (a partir da qual não são mais aceitos lances). 
+
+
+Tipos de leilões
+ Leilão de demanda. Compradores fazem lance de demanda para comprar um lote que o vendedor pretende disponibilizar pelo maior preço. Vence o participante que fez o maior lance de demanda primeiro entre todos os lances, desde que seu lance seja maior do que o preço mínimo estabelecido pelo vendedor.
+     Leilão de oferta. Vendedores ofertam um lote que o comprador pretende adquirir pelo menor preço. O preço do lote leiloado é determinado pelos vendedores a cada lance. Vence o participante que fez o menor lance de oferta primeiro entre todos os lances, desde que seu valor seja inferior ao preço máximo estabelecido pelo comprador. O sistema deve suportar ainda duas formas de realização de lances:
+
+Lote - Lote é um conjunto formado de um ou mais bens que serão leiloados
+
+Produtos []
+um ou mais produtos que serão leiloados. 
+
+Produtos
+descrição breve
+uma descrição completa 
+categoria (por exemplo, mobiliário, informática, etc).
+
+Lances
+
+data e hora que foi realizado
+valor
+usuário que realizou o lance.
+
+Usuario
+cpf ou cnpj
+ endereço de e-mail. 
+
+
+Funcionalidades
+ • Cadastrar usuários;
+ • Cadastrar leilão e bens a serem leiloados; 
+• Visualizar detalhes de um leilão já terminado ou em andamento;
+ • Cadastrar lance em um leilão em andamento; 
+• Cancelar lance em um leilão em andamento. 
+
+Requisitos do trabalho
+
+  • A comprovação do uso de teste unitário, padrões de projeto e de programação por contratos será levada em conta na avaliação do trabalho. (PENDENTE)
+
+• Arquitetura multicamada (pelo menos 3).  Já temos
+• Uso dos padrões de projeto explorados em sala de aula, sendo obrigatoriamente: o Uso do padrão “Facade” (já temos) para isolar a camada de domínio da camada de apresentação; o Uso do padrão arquitetural “Domain Model” na camada de domínio; o Uso do padrão “DAO” na camada de persistência (já temos). 
+• Interface gráfica de usuário desktop (interface textual de console não será aceita); 
+• Persistência em banco de dados relacional;  (já temos)
+• A camada de persistência deve ser implementada sem a utilização de frameworks mapeadores objeto/relacional (como JPA, Hibernate, etc); (já temos)
+• Tratamento correto do encapsulamento de exceções entre as camadas; 
+• O banco de dados deverá ter sido previamente populado (um arquivo contendo os scripts para geração do BD devem ser entregues juntamente com o código fonte) com, no mínimo, os valores necessários para uma boa cobertura de casos de teste. E) Desenvolvimento, apresentação e avaliação do trabalho: 
+• O trabalho pode ser realizado individualmente ou em grupos de, no máximo, 3 alunos. 
+• Os trabalhos serão apresentados no laboratório. Durante a apresentação, TODOS os alunos devem estar presentes e aptos a responder às perguntas. A apresentação do trabalho é de inteira responsabilidade dos alunos (configuração da máquina, do ambiente de software, banco de dados, etc.) e o código-fonte utilizado deverá ser o mesmo entregue ao professor. É tarefa do grupo garantir que o sistema esteja apto a ser executado no dia da apresentação. 
+• Mensagens de erro apresentadas durante a execução do programa, mesmo que a aplicação não pare de executar, serão consideradas como erros de execução. 
+• Os trabalhos serão avaliados de acordo com o que é pedido no enunciado e o que foi realizado com sucesso pelo sistema. Também serão avaliadas a modelagem do sistema (correta criação das classes necessárias, com seus atributos e métodos, encapsulamento, e correto estabelecimento de relações entre as classes) e sua implementação de acordo com os conceitos de orientação a objetos e arquitetura multicamada.
+• Trabalhos copiados resultarão em nota zero para todos os alunos envolvidos.
+
+ F) Entrega do trabalho:
+ • Todos os arquivos necessários a execução do sistema, bem como os arquivos-fonte, scripts de banco de dados e os arquivos de teste unitário, deverão ser empacotados em um único arquivo (.zip) e submetidos através do sistema Moodle até a data de entrega. 
+• Não serão aceit
