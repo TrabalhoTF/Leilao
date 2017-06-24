@@ -6,7 +6,7 @@ package View;
 */
 public class Fachada {
 	
-	// view comentada
+	// view comentada   
 
 	public void name() {
 		
