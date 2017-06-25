@@ -1,6 +1,6 @@
 package business;
 
-import Persistence.LeilaoDAOException;
+import persistence.LeilaoDAOException;
 
 public class LeilaoFachada { 
 	
