@@ -1,7 +1,7 @@
-package Business;
+package business;
 /**
 *
-* @author João França
+* @author JoÃ£o FranÃ§a
 */
 public enum Categoria {
 	
