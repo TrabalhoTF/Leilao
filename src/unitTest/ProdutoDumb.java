@@ -1,4 +1,4 @@
-package UnitTest;
+package unitTest;
 
 import business.Categoria;
 import business.Produto;
