@@ -29,26 +29,31 @@ public class LeilaoFachada {
 	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException {
 		int cont = 0;
 		boolean aux = false;	
-		
+
 		if(ValidadorDados.validarCpfCnpj(cnpj_cpf) == false){
-			 throw new LeilaoException("CPF ou CNPJ invalido!");						
+			throw new LeilaoException("CPF ou CNPJ invalido!");						
 		}else{
 			cont = cont +1;
 		}
-		
+
 		if(ValidadorDados.validarEmail(email) == false){
 			throw new LeilaoException("Email invalido");						
 		}else{
 			cont = cont +1;			
 		}
+
 		if(cont == 2){
 			usuario = new Usuario(cnpj_cpf, nome, email);
 			listaUsuarios.add(usuario);			
 			aux = true;
-		}		
+		} else{
+			LeilaoException erro = new LeilaoException();
+			throw new LeilaoException ("Falha ao adicionar usuario!", erro );
+		}
 		return aux;
+
 	}
-	
+
 	public boolean cadastrarProduto(int id_produto, Categoria categ, String descBreve, String descCompleta) throws LeilaoDAOException{		
 		produto = new Produto(id_produto, categ, descBreve, descCompleta);		
 		return listaProdutos.add(produto);		
