@@ -20,10 +20,11 @@ public class testeFachada {
 	}
 	
 	@Test(expected = LeilaoException.class) 
-	public void testCadastrarUsuarioUsuarioFalse() throws LeilaoException  {		
+	public void testCadastrarUsuarioUsuarioFalse() throws LeilaoException   {		
 		
-			assertTrue(fachada.cadastrarUsuario("001.002.00345", "José", "jose@jose.com"));
-		
+			
+				assertTrue(fachada.cadastrarUsuario("001*002.00345", "José", "jose@jose.com"));
+					
 	}
 
 	

@@ -17,7 +17,7 @@ public class LeilaoFachada {
 	private ArrayList<Lote> listaLote;
 	
 	
-	public LeilaoFachada() throws LeilaoException {	
+	public LeilaoFachada(){	
 		listaUsuarios = new ArrayList<Usuario>();
 		listaProdutos = new ArrayList<Produto>();
 		listaLote = new ArrayList<Lote>();
@@ -31,7 +31,9 @@ public class LeilaoFachada {
 		boolean aux = false;	
 
 		if(ValidadorDados.validarCpfCnpj(cnpj_cpf) == false){
-			throw new LeilaoException("CPF ou CNPJ invalido!");						
+			throw new LeilaoException("CPF ou CNPJ invalido!");	
+			
+			
 		}else{
 			cont = cont +1;
 		}
