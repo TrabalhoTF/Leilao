@@ -30,30 +30,46 @@ public class LeilaoFachada {
 		int cont = 0;
 		boolean aux = false;	
 
-		if(ValidadorDados.validarCpfCnpj(cnpj_cpf) == false){
-			throw new LeilaoException("CPF ou CNPJ invalido!");	
-			
-			
+
+
+		if(ValidadorDados.validarCpfCnpj(cnpj_cpf)){
+			if(ValidadorDados.validarEmail(email)){
+				aux = true;
+			}else{
+				throw new LeilaoException("Email invalido");				
+			}
 		}else{
-			cont = cont +1;
+			throw new LeilaoException("Email invalido");
 		}
 
-		if(ValidadorDados.validarEmail(email) == false){
-			throw new LeilaoException("Email invalido");						
-		}else{
-			cont = cont +1;			
+
+		if(aux = true){				
+			for(Usuario user: listaUsuarios){
+				if(user.getCnpj_cpf().equalsIgnoreCase(cnpj_cpf)){
+					aux = false;										
+				} 
+			}	
+		}
+		
+		try {
+			if(aux == true){
+				usuario = new Usuario(cnpj_cpf, nome, email);
+				listaUsuarios.add(usuario);	
+			} else {
+				catch (throw new LeilaoException("Usuário já cadastrado!");
+			}
+		}  {
+			
+				throw new LeilaoException("Usuário já cadastrado!");
 		}
 
-		if(cont == 2){
-			usuario = new Usuario(cnpj_cpf, nome, email);
-			listaUsuarios.add(usuario);			
-			aux = true;
-		} else{
-			LeilaoException erro = new LeilaoException();
-			throw new LeilaoException ("Falha ao adicionar usuario!", erro );
-		}
-		return aux;
 
+
+			return aux;
+		}
+	
+	public ArrayList<Usuario> getListaUsuario(){
+		return listaUsuarios;
 	}
 
 	public boolean cadastrarProduto(int id_produto, Categoria categ, String descBreve, String descCompleta) throws LeilaoDAOException{		
