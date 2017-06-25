@@ -3,10 +3,10 @@ package business;
 import java.util.ArrayList;
 public class Lote {
 	private int id_lote;	
-	private double preco;
+	private float preco;
 	private ArrayList<Produto> produtos;
 	
-	public Lote(int id_lote, double preco) {
+	public Lote(int id_lote, float preco) {
 		setPreco(preco);
 		setId_lote(id_lote);
 		produtos = new ArrayList<Produto>();
@@ -20,7 +20,7 @@ public class Lote {
 		return preco;
 	}
 	
-	public void setPreco(double preco) {
+	public void setPreco(float preco) {
 		this.preco = preco;
 	}	
 
