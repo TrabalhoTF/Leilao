@@ -1,11 +1,6 @@
 package Business;
 
 import java.util.ArrayList;
-
-/**
-*
-* @author João França
-*/
 public class Lote {
 	private int id_lote;	
 	private double preco;

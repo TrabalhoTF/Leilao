@@ -1,10 +1,12 @@
 package Business;
 
 public class Lance {
-	private String id_leilao, id_usuario, data, hora;
+	private String hora;
+	private String data;
+	private int id_leilao, id_usuario;
 	private float valor;
 	
-	public Lance(String id_leilao, String id_usuario, String data, String hora){
+	public Lance(int id_leilao, int id_usuario, String data, String hora){
 		setData(data);
 		setHora(hora);
 		setId_leilao(id_leilao);
@@ -12,19 +14,19 @@ public class Lance {
 		setValor(valor);		
 	}
 
-	public String getId_leilao() {
+	public int getId_leilao() {
 		return id_leilao;
 	}
 
-	public void setId_leilao(String id_leilao) {
+	public void setId_leilao(int id_leilao) {
 		this.id_leilao = id_leilao;
 	}
 
-	public String getId_usuario() {
+	public int getId_usuario() {
 		return id_usuario;
 	}
 
-	public void setId_usuario(String id_usuario) {
+	public void setId_usuario(int id_usuario) {
 		this.id_usuario = id_usuario;
 	}
 
@@ -67,52 +69,37 @@ public class Lance {
 	// 0 1 2 3 4
 	@Override
 	public int hashCode() {
-		int aux = Integer.parseInt(getData().substring(0, 1)) +
-				  Integer.parseInt(getData().substring(3, 4)) + 
-		          Integer.parseInt(getData().substring(6, 9)) +
+		int aux = (Integer.parseInt(getData().substring(0, 2)) +
+				   Integer.parseInt(getData().substring(3, 5)) + 
+		           Integer.parseInt(getData().substring(6, 10)) +
 		          
-		          Integer.parseInt(getHora().substring(0, 1)) +
-		          Integer.parseInt(getHora().substring(3, 4)) +
+		           Integer.parseInt(getHora().substring(0, 2)) +
+		           Integer.parseInt(getHora().substring(3, 5)) +
 		          
-		          Integer.parseInt(getId_leilao()) +
-		          Integer.parseInt(getId_usuario()) +
-		          
-		          (int)getValor();
+		           getId_leilao() +
+		           getId_usuario() ) *7 +
+				  (int)getValor();
 		return aux;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Lance other = (Lance) obj;
-		if (data == null) {
-			if (other.data != null)
-				return false;
-		} else if (!data.equals(other.data))
-			return false;
-		if (hora == null) {
-			if (other.hora != null)
-				return false;
-		} else if (!hora.equals(other.hora))
-			return false;
-		if (id_leilao == null) {
-			if (other.id_leilao != null)
-				return false;
-		} else if (!id_leilao.equals(other.id_leilao))
-			return false;
-		if (id_usuario == null) {
-			if (other.id_usuario != null)
-				return false;
-		} else if (!id_usuario.equals(other.id_usuario))
-			return false;
-		if (Float.floatToIntBits(valor) != Float.floatToIntBits(other.valor))
-			return false;
-		return true;
+		boolean aux = false;
+		
+		if(obj instanceof Lance){
+			if((((Lance) obj).getId_leilao() + ((Lance) obj).getId_usuario()) 
+			  == (this.getId_leilao() + this.getId_usuario())){
+				if(((Lance) obj).getData().equalsIgnoreCase(this.getData())){
+					if(((Lance) obj).getHora().equalsIgnoreCase(this.getHora())){
+						if(((Lance) obj).getValor() == this.getValor()){
+							aux = true;							
+						}						
+					}					
+				}				
+			}			
+		}
+		
+		return aux;
 	}
 	
 	

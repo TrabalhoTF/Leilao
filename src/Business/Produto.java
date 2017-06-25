@@ -1,8 +1,4 @@
 package Business;
-/**
-*
-* @author João França
-*/
 public class Produto { 
 	
 	private int id_produto;
