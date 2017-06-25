@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import Business.Categoria;
-import Business.Produto;
+import business.Categoria;
+import business.Produto;
 
 public class TestProduto {
 	private Produto produto;

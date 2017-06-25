@@ -6,7 +6,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import Business.Usuario;
+import business.Usuario;
 
 public class TesteUsuario { 
 	Usuario usuario;

@@ -1,4 +1,4 @@
-package Business;
+package business;
 public class Produto { 
 	
 	private int id_produto;

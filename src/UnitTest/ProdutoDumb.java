@@ -1,7 +1,7 @@
 package UnitTest;
 
-import Business.Categoria;
-import Business.Produto;
+import business.Categoria;
+import business.Produto;
 
 public class ProdutoDumb extends Produto {
 	static String descBreve = "Prodduto de boa qualidade.";

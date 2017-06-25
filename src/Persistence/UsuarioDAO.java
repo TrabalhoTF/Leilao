@@ -4,7 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Business.Usuario;
+
+import business.Usuario;
 
 public class UsuarioDAO extends DerbyDAO{
 	

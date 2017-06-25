@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import Business.ValidadorDados;
+import business.ValidadorDados;
 
 public class ValidadorTeste {
 

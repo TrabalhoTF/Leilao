@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import Business.Lance;
+import business.Lance;
 
 public class TestLance {
 	private Lance lance;

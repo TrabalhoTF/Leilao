@@ -1,8 +1,8 @@
-package Business;
+package business;
 
 import java.util.ArrayList;
 
-import Business.*;
+import business.*;
  
 public interface ProdutosDAO {   
 	
