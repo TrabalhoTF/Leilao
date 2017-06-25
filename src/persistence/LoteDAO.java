@@ -1,6 +1,6 @@
-package Persistence;
+package persistence;
 
-public class ProdutoDAO extends DerbyDAO {
+public class LoteDAO extends DerbyDAO{
 
 	@Override
 	public boolean addUser(Object usr) {
