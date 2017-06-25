@@ -34,6 +34,7 @@ public class TesteFachadaSemJunit {
 		try {
 			fachada.cadastrarUsuario("01*002.003/0001-89", "José", "jose@jose.com.br");
 			System.out.println("Cadastro Usuario OK");
+			System.out.println(" ");
 		} catch (Exception e) {
 			System.out.println("Cadastro Usuario não OK");
 			System.out.println(e);
@@ -42,12 +43,20 @@ public class TesteFachadaSemJunit {
 	}
 	
 	public static void testaQuantidadeUsuariosCadastrados() throws LeilaoException{
-		LeilaoFachada fachada = new LeilaoFachada();
-		fachada.cadastrarUsuario("01.002.003/0001-89", "José", "jose@jose.com.br");
-		fachada.cadastrarUsuario("01.002.003/0001-89", "José", "jose@jose.com.br");
-
 		
-		System.out.println(fachada.getListaUsuario().size());
+		try {
+			LeilaoFachada fachada = new LeilaoFachada();
+			fachada.cadastrarUsuario("01.002.003/0001-89", "José", "jose@jose.com.br");
+			fachada.cadastrarUsuario("01.002.003/0001-89", "José", "jose@jose.com.br");
+			fachada.cadastrarUsuario("02.002.003/0001-89", "José", "jose@jose.com.br");
+			System.out.println(fachada.getListaUsuario().size());
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
 		
 	}
 

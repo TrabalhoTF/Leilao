@@ -30,44 +30,40 @@ public class LeilaoFachada {
 		int cont = 0;
 		boolean aux = false;	
 
+		if(ValidadorDados.validarEmail(email)){
+			cont = cont +1;
+		}else{
+			throw new LeilaoException("Email invalido");				
+		}
+
 
 
 		if(ValidadorDados.validarCpfCnpj(cnpj_cpf)){
-			if(ValidadorDados.validarEmail(email)){
-				aux = true;
-			}else{
-				throw new LeilaoException("Email invalido");				
-			}
+			cont = cont +1;				
 		}else{
-			throw new LeilaoException("Email invalido");
+			throw new LeilaoException("CPF/CNPJ invalido");
 		}
 
 
-		if(aux = true){				
+		if(cont == 2){				
 			for(Usuario user: listaUsuarios){
 				if(user.getCnpj_cpf().equalsIgnoreCase(cnpj_cpf)){
-					aux = false;										
+					cont = cont +1;										
 				} 
 			}	
-		}
-		
-		try {
-			if(aux == true){
-				usuario = new Usuario(cnpj_cpf, nome, email);
-				listaUsuarios.add(usuario);	
-			} else {
-				catch (throw new LeilaoException("Usuário já cadastrado!");
-			}
-		}  {
-			
-				throw new LeilaoException("Usuário já cadastrado!");
+		}else {
+			throw new LeilaoException("Usuário já cadastrado!");
 		}
 
+		if(cont == 2){
+			usuario = new Usuario(cnpj_cpf, nome, email);
+			listaUsuarios.add(usuario);
+			aux = true;
+		} 
 
+		return aux;
+	}
 
-			return aux;
-		}
-	
 	public ArrayList<Usuario> getListaUsuario(){
 		return listaUsuarios;
 	}
