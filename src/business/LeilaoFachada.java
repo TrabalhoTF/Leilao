@@ -36,14 +36,11 @@ public class LeilaoFachada {
 			throw new LeilaoException("Email invalido");				
 		}
 
-
-
 		if(ValidadorDados.validarCpfCnpj(cnpj_cpf)){
 			cont = cont +1;				
 		}else{
 			throw new LeilaoException("CPF/CNPJ invalido");
 		}
-
 
 		if(cont == 2){				
 			for(Usuario user: listaUsuarios){
