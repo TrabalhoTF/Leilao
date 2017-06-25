@@ -6,7 +6,7 @@ public class Lance {
 	private int id_leilao, id_usuario;
 	private float valor;
 	
-	public Lance(int id_leilao, int id_usuario, String data, String hora){
+	public Lance(int id_leilao, int id_usuario, String data, String hora, float valor){
 		setData(data);
 		setHora(hora);
 		setId_leilao(id_leilao);

@@ -1,85 +1,35 @@
 package UnitTest;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+
+import Business.Lance;
 
 public class TestLance {
-	
+	private Lance lance;
 	
 
 	@Before
 	public void setUp() {
-		fail("Not yet implemented");
+		lance = new Lance(12345, 54321, "12/12/2222", "23:59", 999999999.999f);
 	}
 
+	//@Test
+	public void testHashCodeTrue() {
+		assertEquals(1002552778, lance.hashCode());
+	}
+	
 	@Test
-	public void testHashCode() {
-		fail("Not yet implemented");
+	public void testHashCodeFalse() {
+		lance.setData("23:58");
+		//System.out.println(lance.getHora());
+		System.out.println(lance.getData());
+		assertEquals(1002552778, lance.hashCode());
 	}
 
-	@Test
-	public void testLance() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetId_leilao() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetId_leilao() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetId_usuario() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetId_usuario() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetData() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetData() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetHora() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetHora() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetValor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetValor() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
+	
+	//@Test
 	public void testEqualsObject() {
 		fail("Not yet implemented");
 	}
