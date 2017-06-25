@@ -14,6 +14,8 @@ public class Lance {
 		setValor(valor);		
 	}
 
+	
+
 	public int getId_leilao() {
 		return id_leilao;
 	}
@@ -77,7 +79,7 @@ public class Lance {
 		           Integer.parseInt(getHora().substring(3, 5)) +
 		          
 		           getId_leilao() +
-		           getId_usuario() ) *7 +
+		           getId_usuario() ) *37 +
 				  (int)getValor();
 		return aux;
 	}

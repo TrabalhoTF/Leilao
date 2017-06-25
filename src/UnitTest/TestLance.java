@@ -15,23 +15,28 @@ public class TestLance {
 		lance = new Lance(12345, 54321, "12/12/2222", "23:59", 999999999.999f);
 	}
 
-	//@Test
+	@Test
 	public void testHashCodeTrue() {
 		assertEquals(1002552778, lance.hashCode());
 	}
 	
-	@Test
+	@Test 
 	public void testHashCodeFalse() {
-		lance.setData("23:58");
-		//System.out.println(lance.getHora());
-		System.out.println(lance.getData());
-		assertEquals(1002552778, lance.hashCode());
+		lance.setHora("23:58");
+		assertFalse(1002552778 == lance.hashCode());
 	}
 
 	
-	//@Test
-	public void testEqualsObject() {
-		fail("Not yet implemented");
+	@Test
+	public void testEqualsObjectTrue() {
+		Lance lance2 = new Lance(12345, 54321, "12/12/2222", "23:59", 999999999.999f);		
+		assertTrue(lance.equals(lance2));
 	}
+	
+	@Test
+		public void testEqualsObjectFalse() {
+			Lance lance2 = new Lance(12345, 54321, "12/12/2222", "23:58", 999999999.999f);		
+			assertFalse(lance.equals(lance2));
+		}
 
 }
