@@ -5,18 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import business.Categoria;
 import business.Lote;
-import business.Produto;
 
 public class LoteDAO extends DerbyDAO{
 
 	@Override
 	public boolean add(Object lote) {
 		try{
-			String sql = "INSERT INTO LOTE VALUES(?)";
+			String sql = "INSERT INTO LOTE VALUES(?, ?)";
 			PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
 			ps.setInt(1, Integer.valueOf(((Lote)lote).getId_lote()));
+			ps.setFloat(2, ((Lote)lote).getPreco());
 			ps.executeUpdate();
 			ps.close();
 		}catch(SQLException e){		
@@ -31,7 +30,7 @@ public class LoteDAO extends DerbyDAO{
 	public Object getById(String idLote) {
 		for(Object i : this.getContentTable() ){
 			if(((Lote)i).getId_lote() == Integer.valueOf(idLote)){
-				Lote prodRetur = (Lote) i;
+				Lote loteRetur = (Lote) i;
 				return i;		
 			}			
 		}	return null;
@@ -47,7 +46,7 @@ public class LoteDAO extends DerbyDAO{
 			ResultSet rs = ps.getResultSet();
 
 			while(rs.next()){
-//				arrayReturn.add(new Lote(rs.getInt("ID_LOTE"));
+			arrayReturn.add(new Lote(rs.getInt("ID_LOTE"), rs.getFloat("PRECO") ));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -55,7 +54,7 @@ public class LoteDAO extends DerbyDAO{
 		}
 
 		if(arrayReturn.size() == 0){
-			System.out.println("Nenhum registro na tabela PRODUTO");
+			System.out.println("Nenhum registro na tabela LOTE");
 			return null;
 		}else{
 			return arrayReturn;

@@ -16,7 +16,7 @@ public class Lote {
 		this.id_lote = id_lote;
 	}
 
-	public double getPreco() {
+	public float getPreco() {
 		return preco;
 	}
 	

@@ -101,11 +101,14 @@ abstract class DerbyDAO implements DAO{
 		}catch(Exception e){}
 		return arrayReturn;
 	}
+	
+	public static void main(String[] args) {
 
+	}
 	
 	public static boolean createTables(){
 		try{
-			String sql = "CREATE TABLE LOTE(ID_LOTE INT NOT NULL PRIMARY KEY,PRECO NUMBER(10,2) NOT NULL)";
+			String sql = "CREATE TABLE LOTE(ID_LOTE INT NOT NULL PRIMARY KEY,PRECO NUMERIC(10,2) NOT NULL)";
 			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);			
 			System.out.println((ps.execute()? "Tabela LOTE criada!": "Erro ao criar tabela LOTE!"));
 
