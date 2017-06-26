@@ -17,13 +17,26 @@ public class TesteUsuario {
 	}
 
 	@Test
-	public void testHashCode() {
-		assertEquals((1+2+3)*37, usuario.hashCode());		
+	public void testHashCodeCPF() {
+		assertEquals((999 + 999)*(999 + 99) *37, usuario.hashCode());		
+	}
+	
+	@Test
+	public void testHashCodeCNPJ() {
+		// XX.XXX.XXX/0001-XX
+		usuario.setCnpj_cpf("99.999.999/9999-99");
+		assertEquals(((99 + 999)*(999 + 9999) +99 ) *37, usuario.hashCode());		
 	}
 
 	@Test
-	public void testEquals2() {
-		fail("Not yet implemented");
+	public void testEquals() {
+		Usuario usuario2 = new Usuario("999.999.999-99", "João", "joao@joao.com.br");		
+		assertEquals(true, usuario.equals(usuario2));
+	}
+	@Test
+	public void testEqualsFalse() {
+		Usuario usuario2 = new Usuario("999.999.999-98", "João", "joao@joao.com.br");		
+		assertEquals(false, usuario.equals(usuario2));
 	}
 
 }
