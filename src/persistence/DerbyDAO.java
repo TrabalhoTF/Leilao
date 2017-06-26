@@ -43,6 +43,7 @@ abstract class DerbyDAO implements DAO{
 				ResultSet rs = ps.getResultSet();
 				int row = 0;
 				while(rs.next()){
+					System.out.println(rs.getString(1));
 					row++;
 				}			
 				System.out.println("Sua query retornou "+row+" tupla(s).");
