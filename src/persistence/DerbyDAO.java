@@ -101,14 +101,14 @@ abstract class DerbyDAO implements DAO{
 		}catch(Exception e){}
 		return arrayReturn;
 	}
-
+	
 	public static boolean createTables(){
 		try{
 			String sql = "CREATE TABLE LOTE(ID_LOTE INT NOT NULL PRIMARY KEY)";
 			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);			
 			System.out.println((ps.execute()? "Tabela LOTE criada!": "Erro ao criar tabela LOTE!"));
 
-			sql = "CREATE TABLE PRODUTO(ID_PRODUTO INT NOT NULL PRIMARY KEY,DESCRICAO_SIMPLES VARCHAR(10) NOT NULL,DESCRICAO_COMPLETA VARCHAR(40)CATEGORIA VARCHAR(10) NOT NULL)";
+			sql = "CREATE TABLE PRODUTO(ID_PRODUTO INT NOT NULL PRIMARY KEY, CATEGORIA VARCHAR(20) NOT NULL, DESCRICAO_SIMPLES VARCHAR(10) NOT NULL,DESCRICAO_COMPLETA VARCHAR(40))";
 			ps = DerbyDAO.getConnection().prepareStatement(sql);
 			System.out.println((ps.execute()? "Tabela PRODUTO criada!": "Erro ao criar tabela PRODUTO!"));
 
@@ -127,11 +127,12 @@ abstract class DerbyDAO implements DAO{
 			sql = "CREATE TABLE LANCE(ID_LANCE INT NOT NULL PRIMARY KEY,CPF_CNPJ INT NOT NULL,ID_LEILAO INT NOT NULL,CONSTRAINT FK_IDUSER FOREIGN KEY (CPF_CNPJ) REFERENCES USUARIO(CPF_CNPJ),CONSTRAINT FK_ID_LEILAO FOREIGN KEY (ID_LEILAO) REFERENCES LEILAO(ID_LEILAO))";
 			ps = DerbyDAO.getConnection().prepareStatement(sql);
 			System.out.println((ps.execute()? "Tabela LANCE criada!": "Erro ao criar tabela LANCE!"));
+		
 			ps.close();
 		}catch(SQLException e ){
 			e.printStackTrace(); return false;
 		}
 		return true;
 	}
-
+	
 }

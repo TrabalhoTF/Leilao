@@ -28,9 +28,9 @@ public class UsuarioDAO extends DerbyDAO{
 	}
 
 	@Override
-	public Object getById(String id){
+	public Object getById(String idUsu){
 		for(Object i : this.getContentTable() ){
-			if(((Usuario)i).getCnpj_cpf().equals(id)){
+			if(((Usuario)i).getCnpj_cpf().equals(idUsu)){
 				Usuario usuRetur = (Usuario) i;
 				return i;		
 			}			

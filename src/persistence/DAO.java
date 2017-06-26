@@ -40,7 +40,7 @@ public interface DAO {
 		}
 	}
 
-	public boolean add(Object usr);
+	public boolean add(Object obj);
 
 	public Object getById(String id);
 

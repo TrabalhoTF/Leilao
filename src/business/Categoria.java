@@ -1,10 +1,10 @@
 package business;
 /**
 *
-* @author João França
+* @author Joao Franca
 */
 public enum Categoria {
 	
 	MOBILIARIA, INFORMATICA, AUTOMOVEL;
-
+	
 }
