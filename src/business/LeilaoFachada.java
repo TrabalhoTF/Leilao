@@ -2,11 +2,10 @@ package business;
 
 import java.util.ArrayList;
 
-import persistence.LeilaoDAOException;
+import persistence.DaoException;
 
 public class LeilaoFachada { 
 	
-	private LeilaoDAOException leilaoDao; 
 	private Usuario usuario;
 	private Produto produto;
 	private Lance lance;
@@ -17,13 +16,11 @@ public class LeilaoFachada {
 	private ArrayList<Lote> listaLote;
 	
 	
-	public LeilaoFachada(){	
+	public LeilaoFachada() throws DaoException{	
 		listaUsuarios = new ArrayList<Usuario>();
 		listaProdutos = new ArrayList<Produto>();
-		listaLote = new ArrayList<Lote>();
-		
-				
-        LeilaoDAOException ld = new LeilaoDAOException();
+		listaLote = new ArrayList<Lote>();				
+		throw new DaoException("ERRO AO CRIAR A FACHADA! ");
     }
 	
 	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException {
@@ -65,7 +62,7 @@ public class LeilaoFachada {
 		return listaUsuarios;
 	}
 
-	public boolean cadastrarProduto(int id_produto, Categoria categ, String descBreve, String descCompleta) throws LeilaoDAOException{		
+	public boolean cadastrarProduto(int id_produto, Categoria categ, String descBreve, String descCompleta) throws DaoException{		
 		produto = new Produto(id_produto, categ, descBreve, descCompleta);		
 		return listaProdutos.add(produto);		
 	}
@@ -92,13 +89,6 @@ public class LeilaoFachada {
 								
 			}			
 		}
-		return aux;
-		
-	}
-	
-	
-	
-	
-
-	
+		return aux;		
+	}	
 }

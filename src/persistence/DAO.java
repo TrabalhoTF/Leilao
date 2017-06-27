@@ -40,9 +40,9 @@ public interface DAO {
 		}
 	}
 
-	public boolean add(Object obj);
+	public boolean add(Object obj) throws DaoException;
 
-	public Object getById(String id);
+	public Object getById(String id) throws DaoException;
 
-	public ArrayList<Object> getContentTable();
+	public ArrayList<Object> getContentTable() throws DaoException;
 }

@@ -13,12 +13,13 @@ import business.Usuario;
  *
  * @author João França
  */
-abstract class DerbyDAO implements DAO{    
+public class DerbyDAO implements DAO{    
 
-	private void Connection(){
+	private void Connection() throws DaoException{
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 		} catch (ClassNotFoundException ex) {
+			throw new DaoException("Não foi possível conectar ao Derby, revisar erros: "+ex.getMessage());
 		}
 	}    
 
@@ -27,7 +28,7 @@ abstract class DerbyDAO implements DAO{
 		return DriverManager.getConnection("jdbc:derby:derbyDB");
 	}
 
-	public static boolean executeSQL(String sql){
+	public  boolean executeSQL(String sql) throws DaoException{
 		try{
 			sql = sql.toUpperCase();
 			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
@@ -51,13 +52,12 @@ abstract class DerbyDAO implements DAO{
 				ps.close();	
 			}
 		}catch(SQLException e ){
-			System.out.println("Teu SQL ta com o seguinte erro: "+e.getMessage());
-			return false;
+			throw new DaoException("Teu SQL ta com o seguinte erro: "+e.getMessage());	
 		}		
 		return true;
 	}
 
-	public static boolean reestartDb(){
+	public  boolean reestartDb() throws DaoException{
 		try{
 			PreparedStatement ps = null;
 			ArrayList<String> sql= new ArrayList<>();
@@ -75,30 +75,31 @@ abstract class DerbyDAO implements DAO{
 			ps.execute();				
 			System.out.println("Banco reiciniado");
 			ps.close();				
-		}catch(SQLException e ){
-			System.out.println("Temos o seguinte erro: "+e.getMessage());
-			return false;
+		}catch(Exception e ){
+			throw new DaoException("Teu SQL ta com o seguinte erro: "+e.getMessage());
 		}
 		return true;
 	}	
 
-	public boolean add(Object usr){	
+	public boolean add(Object usr) throws DaoException{	
 
 		System.out.println("** inserido com sucesso!");
 		return true;
 	}
 
-	public Object getById(String id){
+	public Object getById(String id) throws DaoException{
 		Usuario objRetur = null;		
 		return objRetur;
 	}
 
-	public ArrayList<Object> getContentTable(){
+	public ArrayList<Object> getContentTable() throws DaoException{
 		ArrayList<Object> arrayReturn = new ArrayList<>();
 		try{
 			String sql = "SELECT * FROM ";
 
-		}catch(Exception e){}
+		}catch(Exception e){
+				throw new DaoException("Teu SQL ta com o seguinte erro: "+e.getMessage());
+		}
 		return arrayReturn;
 	}
 	
@@ -106,7 +107,7 @@ abstract class DerbyDAO implements DAO{
 
 	}
 	
-	public static boolean createTables(){
+	public  boolean createTables() throws DaoException{
 		try{
 			String sql = "CREATE TABLE LOTE(ID_LOTE INT NOT NULL PRIMARY KEY,PRECO NUMERIC(10,2) NOT NULL)";
 			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);			
@@ -134,7 +135,7 @@ abstract class DerbyDAO implements DAO{
 		
 			ps.close();
 		}catch(SQLException e ){
-			e.printStackTrace(); return false;
+			throw new DaoException("Não foi possível criar as tabelas, revisar os erros: "+e.getMessage());
 		}
 		return true;
 	}

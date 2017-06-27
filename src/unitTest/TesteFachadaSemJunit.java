@@ -2,10 +2,11 @@ package unitTest;
 
 import business.LeilaoException;
 import business.LeilaoFachada;
+import persistence.DaoException;
 
 public class TesteFachadaSemJunit {
 
-	public static void main(String[] args) throws LeilaoException {
+	public static void main(String[] args) throws LeilaoException, DaoException {
 		testaCadastroUsuarioTrue();
 		testaCadastroUsuarioFalse();
 		testaQuantidadeUsuariosCadastrados();
@@ -13,7 +14,7 @@ public class TesteFachadaSemJunit {
 		
 	}
 	
-	public static void testaCadastroUsuarioTrue(){
+	public static void testaCadastroUsuarioTrue() throws DaoException{
 		LeilaoFachada fachada = new LeilaoFachada();
 		System.out.println("testaCadastroUsuarioTrue()");
 
@@ -28,7 +29,7 @@ public class TesteFachadaSemJunit {
 
 	}
 	
-	public static void testaCadastroUsuarioFalse(){
+	public static void testaCadastroUsuarioFalse() throws DaoException{
 		LeilaoFachada fachada = new LeilaoFachada();
 		System.out.println("testaCadastroUsuarioFalse()");
 		try {

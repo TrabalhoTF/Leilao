@@ -6,12 +6,11 @@ import java.util.ArrayList;
 
 import business.Categoria;
 import business.Produto;
-import business.Usuario;
 
 public class ProdutoDAO extends DerbyDAO {
 
 	@Override
-	public boolean add(Object prod) {	
+	public boolean add(Object prod) throws DaoException {	
 		try{
 			String sql = "INSERT INTO PRODUTO VALUES(?,?,?,?)";
 			PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
@@ -22,8 +21,7 @@ public class ProdutoDAO extends DerbyDAO {
 			ps.executeUpdate();
 			ps.close();
 		}catch(SQLException e){		
-			System.out.println("Erro na inserção do produto: "+e.getMessage());
-			return false;
+			throw new DaoException("Não foi possível completar a inserção, revisar o objeto informado: "+e.getMessage());
 		}		
 		System.out.println("Produto inserido com sucesso!");
 		return true;

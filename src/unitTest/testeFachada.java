@@ -5,12 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import business.*;
+import persistence.DaoException;
 
 public class testeFachada {
 	private LeilaoFachada fachada;
 	
 	@Before
-	public void setUp() throws LeilaoException{
+	public void setUp() throws LeilaoException, DaoException{
 		fachada = new LeilaoFachada();
 	}	
 
