@@ -127,8 +127,10 @@ public class LeilaoFachada {
 	}	
 	
 	public boolean criarLeilao(int id_leilao, boolean tipo, boolean ativo, Usuario principal, String data_inicio,String data_fim) throws LeilaoException{
-		int cont = 0;
+		boolean aux = false;
+		int cont = 0;		
 		Usuario usuarioAux= principal;
+		
 		if(ValidadorDados.compararDatas(data_inicio, data_fim) == 1){
 			cont = cont +1;						
 		}else if(ValidadorDados.compararDatas(data_inicio, data_fim) == -1){
@@ -139,6 +141,8 @@ public class LeilaoFachada {
 		
 		if(usuarioAux != null){
 			cont = cont +1;				
+		}else{
+			new LeilaoException("Usuario invalido!");
 		}
 		
 		if(cont == 2){	
@@ -150,14 +154,53 @@ public class LeilaoFachada {
 		}
 		
 		if(cont == 2){
-
+			aux = true;
 			Leilao leilaoAux = new Leilao(id_leilao, tipo, ativo, principal, data_inicio, data_fim);	
 			listaLeilao.add(leilaoAux);
+		} else {
+			new LeilaoException("Leilao já existente!");
+		}			
+		return aux;
+	}
+	
+	// gera uma lista de acordo com os parametros escolhidos
+	// se tipo = false leilao por demanda
+	// se tipo = true leilao comum
+	// se ativo = true leilao ativo
+	// se ativo = false leilao encerrado
+	public ArrayList<Leilao> getListaAtivosTipo(boolean tipo, boolean ativo){
+		
+		ArrayList<Leilao> listaAtivosInativos = new ArrayList<Leilao>();
+		
+		if(tipo == true && ativo == true){
+			for(Leilao lei: listaLeilao){
+				if(lei.isAtivo() == true && lei.isTipo() == true){
+					listaAtivosInativos.add(lei);					
+				}				
+			}			
+		}else if(tipo == false && ativo == true){
+			for(Leilao lei: listaLeilao){
+				if(lei.isAtivo() == false && lei.isTipo() == true){
+					listaAtivosInativos.add(lei);					
+				}				
+			}
+			
+		}else if(tipo == true && ativo == false){
+			for(Leilao lei: listaLeilao){
+				if(lei.isAtivo() == true && lei.isTipo() == false){
+					listaAtivosInativos.add(lei);					
+				}				
+			}
+			
+		}else {
+			for(Leilao lei: listaLeilao){
+				if(lei.isAtivo() == false && lei.isTipo() == false){
+					listaAtivosInativos.add(lei);					
+				}				
+			}			
 		}
 		
-		
-		
-		return false;
+		return listaAtivosInativos;
 	}
 	
 }
