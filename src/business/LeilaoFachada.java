@@ -16,14 +16,20 @@ public class LeilaoFachada {
 	private HashMap<Integer, Lote> mapId_leilaoLote;
 	
 	
-	public LeilaoFachada() throws DaoException{	
-		listaUsuarios = new ArrayList<Usuario>();
-		listaProdutos = new ArrayList<Produto>();
-		listaLote = new ArrayList<Lote>();			
+	public LeilaoFachada() throws LeilaoException{	
 		
-		mapId_leilaoLote = new HashMap<Integer, Lote>();
+		try {
+			listaUsuarios = new ArrayList<Usuario>();
+			listaProdutos = new ArrayList<Produto>();
+			listaLote = new ArrayList<Lote>();			
+			
+			mapId_leilaoLote = new HashMap<Integer, Lote>();
+			
+		} catch (Exception e) {
+			throw new LeilaoException("ERRO AO CRIAR A FACHADA! ");
+		}		
 		
-		throw new DaoException("ERRO AO CRIAR A FACHADA! ");
+		
     }
 	
 	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException {
@@ -126,10 +132,16 @@ public class LeilaoFachada {
 		return aux;		
 	}	
 	
-	public boolean criarLeilao(int id_leilao, boolean tipo, boolean ativo, Usuario principal, String data_inicio,String data_fim) throws LeilaoException{
+	public boolean criarLeilao(int id_leilao, boolean tipo, boolean ativo, String cpf_cnpj, String data_inicio,String data_fim) throws LeilaoException{
 		boolean aux = false;
 		int cont = 0;		
-		Usuario usuarioAux= principal;
+		Usuario usuarioAux= null;
+		
+		for(Usuario usu: listaUsuarios){
+			if(usu.getCnpj_cpf().equalsIgnoreCase(cpf_cnpj)){
+				usuarioAux = usu;				
+			}
+		}
 		
 		if(ValidadorDados.compararDatas(data_inicio, data_fim) == 1){
 			cont = cont +1;						
@@ -155,7 +167,7 @@ public class LeilaoFachada {
 		
 		if(cont == 2){
 			aux = true;
-			Leilao leilaoAux = new Leilao(id_leilao, tipo, ativo, principal, data_inicio, data_fim);	
+			Leilao leilaoAux = new Leilao(id_leilao, tipo, ativo, usuarioAux, data_inicio, data_fim);	
 			listaLeilao.add(leilaoAux);
 		} else {
 			new LeilaoException("Leilao já existente!");
@@ -172,7 +184,7 @@ public class LeilaoFachada {
 		
 		ArrayList<Leilao> listaAtivosInativos = new ArrayList<Leilao>();
 		
-		if(tipo == true && ativo == true){
+		if(tipo == true && ativo == true && listaAtivosInativos.size() > 0){
 			for(Leilao lei: listaLeilao){
 				if(lei.isAtivo() == true && lei.isTipo() == true){
 					listaAtivosInativos.add(lei);					
