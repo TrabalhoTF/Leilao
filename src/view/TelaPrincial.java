@@ -18,6 +18,8 @@ public class TelaPrincipal {
 	private JFrame frmLeilao;
 	private JTable tLeiloes;
 	private JTable tProdutosLeilao;
+	private JTable tLances;
+	private JTextField txtValorLance;
 
 	/**
 	 * Launch the application.
@@ -89,19 +91,19 @@ public class TelaPrincipal {
 		frmLeilao.getContentPane().add(lblUsuario);
 		
 		JLabel lblListaleiloes = new JLabel("Lista de Leiloes");
-		lblListaleiloes.setBounds(35, 122, 123, 16);
+		lblListaleiloes.setBounds(45, 122, 123, 16);
 		frmLeilao.getContentPane().add(lblListaleiloes);
 		
 		tLeiloes = new JTable();
-		tLeiloes.setBounds(45, 139, 590, 102);
+		tLeiloes.setBounds(45, 139, 299, 185);
 		frmLeilao.getContentPane().add(tLeiloes);
 		
 		JLabel lblProdutos = new JLabel("Produtos");
-		lblProdutos.setBounds(42, 279, 56, 16);
+		lblProdutos.setBounds(45, 358, 56, 16);
 		frmLeilao.getContentPane().add(lblProdutos);
 		
 		tProdutosLeilao = new JTable();
-		tProdutosLeilao.setBounds(45, 308, 590, 164);
+		tProdutosLeilao.setBounds(45, 376, 590, 164);
 		frmLeilao.getContentPane().add(tProdutosLeilao);
 		
 		JLabel txtUsuario = new JLabel("usuario");
@@ -113,5 +115,30 @@ public class TelaPrincipal {
 		txtNumLeilao.setFont(new Font("Tahoma", Font.BOLD, 13));
 		txtNumLeilao.setBounds(125, 27, 56, 16);
 		frmLeilao.getContentPane().add(txtNumLeilao);
+		
+		JLabel lblLances = new JLabel("Lances");
+		lblLances.setBounds(465, 174, 56, 16);
+		frmLeilao.getContentPane().add(lblLances);
+		
+		tLances = new JTable();
+		tLances.setBounds(466, 192, 273, 132);
+		frmLeilao.getContentPane().add(tLances);
+		
+		JLabel lblCadastrarLances = new JLabel("Cadastrar Lances");
+		lblCadastrarLances.setBounds(465, 122, 100, 16);
+		frmLeilao.getContentPane().add(lblCadastrarLances);
+		
+		txtValorLance = new JTextField();
+		txtValorLance.setBounds(508, 139, 116, 22);
+		frmLeilao.getContentPane().add(txtValorLance);
+		txtValorLance.setColumns(10);
+		
+		JLabel lblValor = new JLabel("Valor:");
+		lblValor.setBounds(465, 142, 35, 16);
+		frmLeilao.getContentPane().add(lblValor);
+		
+		JButton btnCadastrarLance = new JButton("Cadastrar");
+		btnCadastrarLance.setBounds(642, 138, 97, 25);
+		frmLeilao.getContentPane().add(btnCadastrarLance);
 	}
 }
