@@ -21,7 +21,8 @@ public class LeilaoFachada {
 		try {
 			listaUsuarios = new ArrayList<Usuario>();
 			listaProdutos = new ArrayList<Produto>();
-			listaLote = new ArrayList<Lote>();			
+			listaLote = new ArrayList<Lote>();		
+			listaLeilao = new ArrayList<Leilao>();
 			
 			mapId_leilaoLote = new HashMap<Integer, Lote>();
 			
@@ -35,24 +36,24 @@ public class LeilaoFachada {
 	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException {
 		Usuario usuario = null;
 		int cont = 0;
-		boolean aux = false;	
+		boolean aux = false;
 
 		if(ValidadorDados.validarEmail(email)){
-			cont = cont +1;
+			cont = cont +1;			
 		}else{
 			throw new LeilaoException("Email invalido");				
 		}
 
 		if(ValidadorDados.validarCpfCnpj(cnpj_cpf)){
-			cont = cont +1;				
+			cont = cont +1;
 		}else{
 			throw new LeilaoException("CPF/CNPJ invalido");
 		}
 
-		if(cont == 2){				
+		if(cont == 2){	
 			for(Usuario user: listaUsuarios){
 				if(user.getCnpj_cpf().equalsIgnoreCase(cnpj_cpf)){
-					cont = cont +1;										
+					cont = cont +1;	
 				} 
 			}	
 		}else {
@@ -132,14 +133,14 @@ public class LeilaoFachada {
 		return aux;		
 	}	
 	
-	public boolean criarLeilao(int id_leilao, boolean tipo, boolean ativo, String cpf_cnpj, String data_inicio,String data_fim) throws LeilaoException{
+	public boolean criarLeilao(int id_leilao, boolean tipo, boolean ativo, String cpf_cnpj, String data_inicio,String data_fim) {
 		boolean aux = false;
 		int cont = 0;		
-		Usuario usuarioAux= null;
+		Usuario usuarioAux= null;		
 		
 		for(Usuario usu: listaUsuarios){
 			if(usu.getCnpj_cpf().equalsIgnoreCase(cpf_cnpj)){
-				usuarioAux = usu;				
+				usuarioAux = usu;	
 			}
 		}
 		
@@ -165,13 +166,14 @@ public class LeilaoFachada {
 			}
 		}
 		
+		
 		if(cont == 2){
 			aux = true;
 			Leilao leilaoAux = new Leilao(id_leilao, tipo, ativo, usuarioAux, data_inicio, data_fim);	
 			listaLeilao.add(leilaoAux);
 		} else {
 			new LeilaoException("Leilao já existente!");
-		}			
+		}					
 		return aux;
 	}
 	
@@ -182,37 +184,49 @@ public class LeilaoFachada {
 	// se ativo = false leilao encerrado
 	public ArrayList<Leilao> getListaAtivosTipo(boolean tipo, boolean ativo){
 		
-		ArrayList<Leilao> listaAtivosInativos = new ArrayList<Leilao>();
+		ArrayList<Leilao> listaTipoAtivo = new ArrayList<Leilao>();
 		
-		if(tipo == true && ativo == true && listaAtivosInativos.size() > 0){
-			for(Leilao lei: listaLeilao){
-				if(lei.isAtivo() == true && lei.isTipo() == true){
-					listaAtivosInativos.add(lei);					
-				}				
-			}			
-		}else if(tipo == false && ativo == true){
-			for(Leilao lei: listaLeilao){
-				if(lei.isAtivo() == false && lei.isTipo() == true){
-					listaAtivosInativos.add(lei);					
-				}				
-			}
-			
-		}else if(tipo == true && ativo == false){
-			for(Leilao lei: listaLeilao){
-				if(lei.isAtivo() == true && lei.isTipo() == false){
-					listaAtivosInativos.add(lei);					
-				}				
-			}
-			
-		}else {
-			for(Leilao lei: listaLeilao){
-				if(lei.isAtivo() == false && lei.isTipo() == false){
-					listaAtivosInativos.add(lei);					
-				}				
-			}			
-		}
 		
-		return listaAtivosInativos;
+		if(listaLeilao.size() > 0){			
+			if(tipo == true){
+				if(ativo == true){
+					
+					for(Leilao lei: listaLeilao){							
+						if(lei.isAtivo() == true ){
+							System.out.println(lei.isTipo());
+							listaTipoAtivo.add(lei);	
+						}
+					}
+				} else {
+					for(Leilao lei: listaLeilao){
+						if(lei.isAtivo() == false ){
+							listaTipoAtivo.add(lei);	
+						}
+					}
+
+				}
+			}else{	// tipo = false			
+					if(ativo == true){
+						for(Leilao lei: listaLeilao){							
+							if(lei.isAtivo() == true ){
+								listaTipoAtivo.add(lei);	
+							}
+						}
+					} else { //ativo = false
+						for(Leilao lei: listaLeilao){
+							if(lei.isAtivo() == false ){
+								listaTipoAtivo.add(lei);	
+							}
+						}
+
+					}	
+				
+			}
+		} else {
+			new LeilaoException("Não há leilões cadastrados!");
+		}				
+		
+		return listaTipoAtivo;
+
 	}
-	
 }
