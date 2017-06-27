@@ -123,11 +123,11 @@ public class DerbyDAO implements DAO{
 			ps = DerbyDAO.getConnection().prepareStatement(sql);
 			System.out.println((ps.execute()? "Tabela LEILAO criada!": "Erro ao criar tabela LEILAO!"));
 
-			sql = "CREATE TABLE USUARIO(CPF_CNPJ INT NOT NULL PRIMARY KEY,NOME VARCHAR(20) NOT NULL,EMAIL VARCHAR(30) NOT NULL)";
+			sql = "CREATE TABLE USUARIO(CPF_CNPJ VARCHAR(30) NOT NULL PRIMARY KEY,NOME VARCHAR(20) NOT NULL,EMAIL VARCHAR(30) NOT NULL)";
 			ps = DerbyDAO.getConnection().prepareStatement(sql);
 			System.out.println((ps.execute()? "Tabela USUARIO criada!": "Erro ao criar tabela USUARIO!"));
 
-			sql = "CREATE TABLE LANCE(ID_LANCE INT NOT NULL PRIMARY KEY,CPF_CNPJ INT NOT NULL,ID_LEILAO INT NOT NULL,CONSTRAINT FK_IDUSER FOREIGN KEY (CPF_CNPJ) REFERENCES USUARIO(CPF_CNPJ),CONSTRAINT FK_ID_LEILAO FOREIGN KEY (ID_LEILAO) REFERENCES LEILAO(ID_LEILAO))";
+			sql = "CREATE TABLE LANCE(ID_LANCE INT NOT NULL PRIMARY KEY,CPF_CNPJ VARCHAR(30) NOT NULL,ID_LEILAO INT NOT NULL,CONSTRAINT FK_IDUSER FOREIGN KEY (CPF_CNPJ) REFERENCES USUARIO(CPF_CNPJ),CONSTRAINT FK_ID_LEILAO FOREIGN KEY (ID_LEILAO) REFERENCES LEILAO(ID_LEILAO))";
 			ps = DerbyDAO.getConnection().prepareStatement(sql);
 			System.out.println((ps.execute()? "Tabela LANCE criada!": "Erro ao criar tabela LANCE!"));
 
@@ -137,8 +137,6 @@ public class DerbyDAO implements DAO{
 		}
 		return true;
 	}
-
-
 	@Override
 	public int updateCurrentId(String tableName) throws DaoException {
 		int num = 0;
@@ -169,4 +167,10 @@ public class DerbyDAO implements DAO{
 		return updateCurrentId(this.table);
 	}
 
+	public static void main(String[] args) throws DaoException {
+		SingletonPersistence s = new SingletonPersistence();
+		String sql = "";
+		s.executeSQL(sql);
+	}
+	
 }
