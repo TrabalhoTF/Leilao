@@ -6,20 +6,6 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 public class ValidadorDados { 
-	public static boolean validaData(String data) {
-		String dateFormat = "dd/MM/uuuu";
-
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-				.ofPattern(dateFormat)
-				.withResolverStyle(ResolverStyle.STRICT);
-		try {
-			LocalDate date = LocalDate.parse(data, dateTimeFormatter);
-			return true;
-		} catch (DateTimeParseException e) {
-			return false;
-		} 
-	}
-
 	public static boolean validarEmail(String email){
 		return email.contains("@");		
 	}
@@ -100,4 +86,38 @@ public class ValidadorDados {
 		
 		return aux;
 	}
+	
+	// DD / MM / AAAA
+	// 01 2 34 5 6789
+	
+	// Compara duas datas,
+	//se data A < que data B retorna 1
+	//se data B < que data A retorna -1
+	//se data A = data b retorna 0
+	
+	//se as uma das datas for invalida retorna 999
+	public static int compararDatas(String dataA, String dataB){
+		if(validarData(dataA) && validarData(dataB)){
+			int valorA= Integer.parseInt(dataA.substring(0,2))*9+
+				    	Integer.parseInt(dataA.substring(3,5))*8+
+				    	Integer.parseInt(dataA.substring(6,10))*7;
+			
+			int valorB= Integer.parseInt(dataB.substring(0,2))*9+
+			    	    Integer.parseInt(dataB.substring(3,5))*8+
+			        	Integer.parseInt(dataB.substring(6,10))*7;
+			
+			if(valorA < valorB){
+				return 1;
+			} else if (valorA > valorB){
+				return -1;				
+			} else{
+				return 0;
+			}
+			
+			
+		} else {
+			return 999;
+		}			
+	}
+	
 }

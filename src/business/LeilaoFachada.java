@@ -7,14 +7,11 @@ import persistence.DaoException;
 
 public class LeilaoFachada { 
 	
-	private Usuario usuario;
-	private Produto produto;
-	private Lance lance;
-	private Lote lote;
 	
 	private ArrayList<Usuario> listaUsuarios;
 	private ArrayList<Produto> listaProdutos;
 	private ArrayList<Lote> listaLote;
+	private ArrayList<Leilao> listaLeilao;
 	
 	private HashMap<Integer, Lote> mapId_leilaoLote;
 	
@@ -30,6 +27,7 @@ public class LeilaoFachada {
     }
 	
 	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException {
+		Usuario usuario = null;
 		int cont = 0;
 		boolean aux = false;	
 
@@ -69,11 +67,12 @@ public class LeilaoFachada {
 	}
 
 	public boolean cadastrarProduto(int id_produto, Categoria categ, String descBreve, String descCompleta) throws DaoException{		
-		produto = new Produto(id_produto, categ, descBreve, descCompleta);		
+		Produto produto = new Produto(id_produto, categ, descBreve, descCompleta);		
 		return listaProdutos.add(produto);		
 	}
 	
-	public boolean criarLote(int id_leilao, int id_lote, float preco) throws LeilaoException{
+	public boolean criarLoteAdtibuirLeilao(int id_leilao, int id_lote, float preco) throws LeilaoException{
+		Lote lote;
 		boolean aux = false;
 		if(ValidadorDados.validarValor(preco)){
 			lote = new Lote(id_lote, preco);
@@ -94,22 +93,71 @@ public class LeilaoFachada {
 		return aux;		
 	}
 	
+	public HashMap<Integer, Lote> getMapId_leilaoLote(){
+		return mapId_leilaoLote;
+	}
 	
-	
-	
-	public boolean adicionarProdutoLote( int id_lote, int id_produto ){
+	public boolean adicionarProdutoLote( int id_leilao, int id_lote, int id_produto ) throws LeilaoException{
 		boolean aux = false;
+		Produto prodAux = null;
 		for(Lote lo: listaLote){
 			if(lo.getId_lote() == id_lote){
 				for(Produto prod :listaProdutos){
 					if(prod.getId_produto() == id_produto){
+						prodAux = prod;
 						lo.addProdduto(prod);
-						aux = true;
 					}					
 				}
-								
+
 			}			
+		}		
+
+		
+		if(prodAux == null){
+			new LeilaoException("Produto não encontrado!");
+		} else {
+			if(mapId_leilaoLote.containsKey(id_leilao)){	
+				mapId_leilaoLote.get(id_leilao).addProdduto(prodAux);		
+				aux = true;
+			} else {
+				new LeilaoException("Leilão não encontrado!");
+			}
 		}
 		return aux;		
 	}	
+	
+	public boolean criarLeilao(int id_leilao, boolean tipo, boolean ativo, Usuario principal, String data_inicio,String data_fim) throws LeilaoException{
+		int cont = 0;
+		Usuario usuarioAux= principal;
+		if(ValidadorDados.compararDatas(data_inicio, data_fim) == 1){
+			cont = cont +1;						
+		}else if(ValidadorDados.compararDatas(data_inicio, data_fim) == -1){
+			new LeilaoException("Datas invalidas! Data de final não pode ser menor que a data inicial!");			
+		} else{
+			new LeilaoException("Formato invalido para datas!");
+		}
+		
+		if(usuarioAux != null){
+			cont = cont +1;				
+		}
+		
+		if(cont == 2){	
+			for(Leilao lei: listaLeilao){
+				if(lei.getId_leilao()== id_leilao){
+					cont = 0;					
+				}				
+			}
+		}
+		
+		if(cont == 2){
+
+			Leilao leilaoAux = new Leilao(id_leilao, tipo, ativo, principal, data_inicio, data_fim);	
+			listaLeilao.add(leilaoAux);
+		}
+		
+		
+		
+		return false;
+	}
+	
 }

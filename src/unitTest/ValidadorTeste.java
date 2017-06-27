@@ -10,22 +10,47 @@ public class ValidadorTeste {
 
 	@Test
 	public void testValidaDataTrue() {
-		assertEquals(true, ValidadorDados.validaData("21/12/2015"));
+		assertEquals(true, ValidadorDados.validarData("21/12/2015"));
 	}
 	
 	@Test
 	public void testValidaDataFalseMes() {
-		assertEquals(false, ValidadorDados.validaData("21/13/2015"));
+		assertEquals(false, ValidadorDados.validarData("21/13/2015"));
 	}
 	
 	@Test
 	public void testValidaDataFalseDia() { 
-		assertEquals(false, ValidadorDados.validaData("29/02/2015"));
+		assertEquals(false, ValidadorDados.validarData("29/02/2015"));
 	}
 	
 	@Test
 	public void testValidaDataFalseAno() {
-		assertEquals(false, ValidadorDados.validaData("28/02/00000"));
+		assertEquals(false, ValidadorDados.validarData("28/02/00000"));
+	}
+	
+	@Test
+	public void compararDatasIguais(){
+		assertEquals(0,ValidadorDados.compararDatas("10/10/2012", "10/10/2012"));
+	}
+	
+	@Test
+	public void compararDatasDataInicialMenor(){
+		assertEquals(1,ValidadorDados.compararDatas("09/10/2012", "10/10/2012"));
+	}
+	
+	@Test
+	public void compararDatasDataFinalMenor(){
+		assertEquals(-1,ValidadorDados.compararDatas("10/10/2012", "09/10/2012"));
+	}
+	
+	@Test
+	public void compararDatasDataInicialInvalida(){
+		assertEquals(999,ValidadorDados.compararDatas("10/102012", "09/10/2012"));
+	}
+	
+	@Test
+	public void compararDatasDataFinalInvalida(){
+		assertEquals(999,ValidadorDados.compararDatas("10/10/2012", "30/02/2012"));
 	}
 	
 	@Test
