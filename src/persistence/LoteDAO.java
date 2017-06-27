@@ -74,7 +74,7 @@ public class LoteDAO extends DerbyDAO{
 	}
 		
 	public static void main(String[] args) throws DaoException {
-		SingletonPersistence s = new SingletonPersistence();
+		FacadePersistence s = new FacadePersistence();
 		s.executeSQL("select nome from usuario");
 	}
 	

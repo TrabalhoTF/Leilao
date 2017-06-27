@@ -7,16 +7,16 @@ import business.Produto;
 import business.Usuario;
 import sun.security.jca.GetInstance;
 
-public class SingletonPersistence {
+public class FacadePersistence {
 
 
 	private LoteDAO loteDAO = new LoteDAO();
 	private DerbyDAO derbyDAO = new DerbyDAO();
-	private LoteXProduto lotexprod;
+	private LoteXProduto lotexprod = new LoteXProduto();
 	private ProdutoDAO produtoDAO = new ProdutoDAO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-	public SingletonPersistence() throws DaoException{
+	public FacadePersistence() throws DaoException{
 		this.lotexprod = new LoteXProduto();
 	}
 	
@@ -32,8 +32,8 @@ public class SingletonPersistence {
 		return this.produtoDAO.add(prod);
 	}
 
-	public boolean addLoteXUser(ArrayList<Integer> loteXprod) throws DaoException{
-		this.lotexprod.add(loteXprod);
+	public boolean addLoteXProduto(int idLote, int idProd) throws DaoException{
+		this.lotexprod.addLoteXProd(idLote, idProd);
 		return true;
 	}
 

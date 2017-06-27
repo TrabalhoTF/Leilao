@@ -1,9 +1,11 @@
 package persistence;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+
+import business.Categoria;
+import business.Lote;
+import business.Produto;
 
 public class LoteXProduto extends DerbyDAO implements LoteXProdutoDAO {
 
@@ -14,7 +16,7 @@ public class LoteXProduto extends DerbyDAO implements LoteXProdutoDAO {
 	}
 
 	@Override
-	public boolean add(int idLote, int idProd) throws DaoException {		
+	public boolean addLoteXProd(int idLote, int idProd) throws DaoException {		
 		try{
 			String sql = "INSERT INTO LOTEXPRODUTO VALUES(?,?,?)";
 			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
@@ -43,5 +45,15 @@ public class LoteXProduto extends DerbyDAO implements LoteXProdutoDAO {
 	@Override
 	public int getCurrentId() throws DaoException {
 		return super.updateCurrentId("LOTEXPRODUTO");
+	}
+	
+	public static void main(String[] args) throws DaoException {
+		LoteXProduto s = new LoteXProduto();
+		FacadePersistence t = new FacadePersistence();
+		
+		t.addLote(new Lote(1, 100));
+		t.addProd(new Produto(1, Categoria.AUTOMOVEL, "BREVE", "COMPLETA"));
+		t.addLoteXProduto(1,1);
+		System.out.println(s.getCurrentId());
 	}
 }

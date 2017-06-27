@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface LoteXProdutoDAO{
 	
-	public boolean add(int idLote, int idProd) throws DaoException;
+	public boolean addLoteXProd(int idLote, int idProd) throws DaoException;
 
 	public ArrayList<Integer> getById(int idLote, int idProd) throws DaoException;
 

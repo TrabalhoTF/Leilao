@@ -168,7 +168,7 @@ public class DerbyDAO implements DAO{
 	}
 
 	public static void main(String[] args) throws DaoException {
-		SingletonPersistence s = new SingletonPersistence();
+		FacadePersistence s = new FacadePersistence();
 		String sql = "";
 		s.executeSQL(sql);
 	}
