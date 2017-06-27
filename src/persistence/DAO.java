@@ -9,40 +9,19 @@ import java.util.ArrayList;
 
 public interface DAO {
   
+	int id = 0;
 
-	public static Connection getConnection() throws SQLException {
-		//derbyDB sera o nome do diretorio criado localmente
-		return DriverManager.getConnection("jdbc:derby:derbyDB");
-	}
+	public static Connection getConnection() throws SQLException {return null;}
 
-	public static boolean consultarTabelas(String sql){		
-		if(sql.contains("update") || sql.contains("insert") || sql.contains("drop") || sql.contains("delete")){
-			System.out.println("Permitido somente consultas!");
-			return false;
-		}
-		else{
-
-			try{
-				PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
-				ps.executeQuery();
-				ResultSet rs = ps.getResultSet();
-				int row = 0;
-				while(rs.next()){
-					System.out.println((row++)+":"+rs.getRow());
-				}			
-				rs.close();
-				ps.close();	
-			}catch(SQLException e ){
-				e.printStackTrace();
-				return false;
-			}		
-			return true;
-		}
-	}
+	public static boolean consultarTabelas(String sql){return false;}
 
 	public boolean add(Object obj) throws DaoException;
 
 	public Object getById(String id) throws DaoException;
 
 	public ArrayList<Object> getContentTable() throws DaoException;
+	
+	public int updateCurrentId(String tableName) throws DaoException;
+	
+	public int getCurrentId() throws DaoException;
 }

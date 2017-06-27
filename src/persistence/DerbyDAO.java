@@ -15,6 +15,8 @@ import business.Usuario;
  */
 public class DerbyDAO implements DAO{    
 
+	String table = "";
+	
 	private void Connection() throws DaoException{
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
@@ -98,15 +100,11 @@ public class DerbyDAO implements DAO{
 			String sql = "SELECT * FROM ";
 
 		}catch(Exception e){
-				throw new DaoException("Teu SQL ta com o seguinte erro: "+e.getMessage());
+			throw new DaoException("Teu SQL ta com o seguinte erro: "+e.getMessage());
 		}
 		return arrayReturn;
 	}
-	
-	public static void main(String[] args) {
 
-	}
-	
 	public  boolean createTables() throws DaoException{
 		try{
 			String sql = "CREATE TABLE LOTE(ID_LOTE INT NOT NULL PRIMARY KEY,PRECO NUMERIC(10,2) NOT NULL)";
@@ -132,12 +130,43 @@ public class DerbyDAO implements DAO{
 			sql = "CREATE TABLE LANCE(ID_LANCE INT NOT NULL PRIMARY KEY,CPF_CNPJ INT NOT NULL,ID_LEILAO INT NOT NULL,CONSTRAINT FK_IDUSER FOREIGN KEY (CPF_CNPJ) REFERENCES USUARIO(CPF_CNPJ),CONSTRAINT FK_ID_LEILAO FOREIGN KEY (ID_LEILAO) REFERENCES LEILAO(ID_LEILAO))";
 			ps = DerbyDAO.getConnection().prepareStatement(sql);
 			System.out.println((ps.execute()? "Tabela LANCE criada!": "Erro ao criar tabela LANCE!"));
-		
+
 			ps.close();
 		}catch(SQLException e ){
 			throw new DaoException("Não foi possível criar as tabelas, revisar os erros: "+e.getMessage());
 		}
 		return true;
 	}
-	
+
+
+	@Override
+	public int updateCurrentId(String tableName) throws DaoException {
+		int num = 0;
+		this.table = tableName;
+		try{
+			String sql = "SELECT * FROM "+ this.table;
+			
+			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
+			ps.executeQuery();
+			
+			ResultSet rs = ps.getResultSet();
+			
+			while(rs.next()){
+				num++;
+				System.out.println(sql);
+			}		
+			
+			ps.close();
+			rs.close();			
+		}catch(Exception e){
+			num = 0;
+			throw new DaoException("\n Erro ao consultar o id corrente, verificar: \n"+e.getCause());	
+		}return num;
+	}
+
+	@Override
+	public int getCurrentId() throws DaoException {
+		return updateCurrentId(this.table);
+	}
+
 }

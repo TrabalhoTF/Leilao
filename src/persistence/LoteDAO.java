@@ -14,7 +14,7 @@ public class LoteDAO extends DerbyDAO{
 		try{
 			String sql = "INSERT INTO LOTE VALUES(?, ?)";
 		 	PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
-			ps.setInt(1, Integer.valueOf(((Lote)lote).getId_lote()));
+			ps.setInt(1, getCurrentId());
 			ps.setFloat(2, ((Lote)lote).getPreco());
 			ps.executeUpdate();
 			ps.close();
@@ -65,4 +65,18 @@ public class LoteDAO extends DerbyDAO{
 			return arrayReturn;
 		}
 	}
+	
+	@Override
+	public int getCurrentId() throws DaoException {
+		super.updateCurrentId("LOTE");
+		System.out.println(super.getCurrentId());
+		return super.getCurrentId();
+	}
+		
+	public static void main(String[] args) throws DaoException {
+		SingletonPersistence s = new SingletonPersistence();
+		s.executeSQL("select nome from usuario");
+	}
+	
+
 }
