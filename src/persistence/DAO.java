@@ -14,12 +14,6 @@ public interface DAO {
 	public static Connection getConnection() throws SQLException {return null;}
 
 	public static boolean consultarTabelas(String sql){return false;}
-
-	public boolean add(Object obj) throws DaoException;
-
-	public Object getById(String id) throws DaoException;
-
-	public ArrayList<Object> getContentTable() throws DaoException;
 	
 	public int updateCurrentId(String tableName) throws DaoException;
 	

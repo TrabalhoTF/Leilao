@@ -12,14 +12,14 @@ public class FacadePersistence {
 
 	private LoteDAO loteDAO = new LoteDAO();
 	private DerbyDAO derbyDAO = new DerbyDAO();
-	private LoteXProduto lotexprod = new LoteXProduto();
+	private LoteXProdutoDAO lotexprod = new LoteXProdutoDAO();
 	private ProdutoDAO produtoDAO = new ProdutoDAO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 	public FacadePersistence() throws DaoException{
-		this.lotexprod = new LoteXProduto();
+		this.lotexprod = new LoteXProdutoDAO();
 	}
-	
+
 	public boolean  addUser(Usuario user) throws DaoException{
 		return this.usuarioDAO.add(user);
 	}
@@ -53,8 +53,8 @@ public class FacadePersistence {
 	public ArrayList<Usuario> getArrayUsers() throws DaoException{		
 		ArrayList<Usuario> usr = new ArrayList<>();
 		int cont = 0;
-		for(Object usr1: this.usuarioDAO.getContentTable()){
-			usr.add(((ArrayList<Usuario>)usr1).get(cont));
+		for(Usuario usr1: this.usuarioDAO.getContentTable()){
+			usr.add(usr1);
 			cont++;
 		}		
 		return usr;
@@ -64,30 +64,28 @@ public class FacadePersistence {
 	public ArrayList<Produto> getArrayProd() throws DaoException{
 		ArrayList<Produto> prod = new ArrayList<>();
 		int cont = 0;
-		for(Object pr: this.produtoDAO.getContentTable()){
-			prod.add(((ArrayList<Produto>)pr).get(cont));
+		for(Produto pr: this.produtoDAO.getContentTable()){
+			prod.add(pr);
 			cont++;
 		}		
 		return prod;		
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<Lote> getArrayLote() throws DaoException{
+	public ArrayList<Lote> getArrayListLote() throws DaoException{
 		ArrayList<Lote> lote = new ArrayList<>();
-		int cont = 0;
-		for(Object lt: this.loteDAO.getContentTable()){
-			lote.add(((ArrayList<Lote>)lt).get(cont));
-			cont++;
+		for(int i = 0 ; i < loteDAO.getContentTable().size() ; i++){
+			lote.add(this.loteDAO.getContentTable().get(i));
 		}		
 		return lote;		
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<Integer> getArrayLoteXProd() throws DaoException{
+	public ArrayList<Integer> getArrayListLoteXProd() throws DaoException{
 		ArrayList<Integer> lotexprod = new ArrayList<>();
 		int cont = 0;
-		for(Object lp: this.lotexprod.getContentTable()){
-			lotexprod.add(((ArrayList<Integer>)lp).get(cont));
+		for(int lp: this.lotexprod.getContentTab()){
+			lotexprod.add(lp);
 			cont++;
 		}		
 		return lotexprod;		

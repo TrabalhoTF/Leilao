@@ -7,15 +7,15 @@ import java.util.ArrayList;
 
 import business.Lote;
 
-public class LoteDAO extends DerbyDAO{
+public class LoteDAO extends DerbyDAO implements LoteDAOInteface{
 
 	@Override
-	public boolean add(Object lote) throws DaoException {
+	public boolean add(Lote lote) throws DaoException {
 		try{
 			String sql = "INSERT INTO LOTE VALUES(?, ?)";
 		 	PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
 			ps.setInt(1, getCurrentId());
-			ps.setFloat(2, ((Lote)lote).getPreco());
+			ps.setFloat(2, lote.getPreco());
 			ps.executeUpdate();
 			ps.close();
 		}catch(SQLException e){		
@@ -26,12 +26,12 @@ public class LoteDAO extends DerbyDAO{
 	}
 
 	@Override
-	public Object getById(String idLote) throws DaoException {
+	public Lote getById(String idLote) throws DaoException {
 
 		try{
-			for(Object i : this.getContentTable() ){
+			for(Lote i : this.getContentTable() ){
 
-				if(((Lote)i).getId_lote() == Integer.valueOf(idLote)){
+				if(i.getId_lote() == Integer.valueOf(idLote)){
 					Lote loteRetur = (Lote) i;
 					return i;		
 				}	
@@ -42,8 +42,8 @@ public class LoteDAO extends DerbyDAO{
 	}
 
 	@Override
-	public ArrayList<Object> getContentTable() {
-		ArrayList<Object> arrayReturn = new ArrayList<>();
+	public ArrayList<Lote> getContentTable() {
+		ArrayList<Lote> arrayReturn = new ArrayList<>();
 		try{
 			String sql = "SELECT * FROM LOTE";
 			PreparedStatement ps = getConnection().prepareStatement(sql);
@@ -68,9 +68,7 @@ public class LoteDAO extends DerbyDAO{
 	
 	@Override
 	public int getCurrentId() throws DaoException {
-		super.updateCurrentId("LOTE");
-		System.out.println(super.getCurrentId());
-		return super.getCurrentId();
+		return super.updateCurrentId("LOTE");
 	}
 		
 	public static void main(String[] args) throws DaoException {

@@ -7,16 +7,16 @@ import java.util.ArrayList;
 
 import business.Usuario;
 
-public class UsuarioDAO extends DerbyDAO{
+public class UsuarioDAO extends DerbyDAO implements UsuarioDAOInterface{ 
 
 	@Override
-	public boolean add(Object usr) throws DaoException {	
+	public boolean add(Usuario usr) throws DaoException {	
 		try{
 			String sql = "INSERT INTO USUARIO VALUES(?,?,?)";
 			PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
-			ps.setInt(1, Integer.valueOf(((Usuario)usr).getCnpj_cpf()));
-			ps.setString(2, ((Usuario) usr).getNome());
-			ps.setString(3, ((Usuario) usr).getEmail());		
+			ps.setInt(1, Integer.valueOf(usr.getCnpj_cpf()));
+			ps.setString(2, usr.getNome());
+			ps.setString(3, usr.getEmail());		
 			ps.executeUpdate();
 			ps.close();
 		}catch(Exception e){		
@@ -27,11 +27,11 @@ public class UsuarioDAO extends DerbyDAO{
 	}
 
 	@Override
-	public Object getById(String idUsu) throws DaoException{
+	public Usuario getById(String idUsu) throws DaoException{
 		try{
-			for(Object i : this.getContentTable() ){
-				if(((Usuario)i).getCnpj_cpf().equals(idUsu)){
-					Usuario usuRetur = (Usuario) i;
+			for(Usuario i : this.getContentTable() ){
+				if(i.getCnpj_cpf().equals(idUsu)){
+					Usuario usuRetur = i;
 					return i;	
 				}
 			}
@@ -42,9 +42,9 @@ public class UsuarioDAO extends DerbyDAO{
 	}
 
 	@Override
-	public ArrayList<Object> getContentTable() throws DaoException{
+	public ArrayList<Usuario> getContentTable() throws DaoException{
 
-		ArrayList<Object> arrayReturn = new ArrayList<>();
+		ArrayList<Usuario> arrayReturn = new ArrayList<>();
 		try{
 			String sql = "SELECT * FROM USUARIO";
 			PreparedStatement ps = getConnection().prepareStatement(sql);

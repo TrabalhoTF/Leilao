@@ -83,28 +83,6 @@ public class DerbyDAO implements DAO{
 		return true;
 	}	
 
-	public boolean add(Object usr) throws DaoException{	
-
-		System.out.println("** inserido com sucesso!");
-		return true;
-	}
-
-	public Object getById(String id) throws DaoException{
-		Usuario objRetur = null;		
-		return objRetur;
-	}
-
-	public ArrayList<Object> getContentTable() throws DaoException{
-		ArrayList<Object> arrayReturn = new ArrayList<>();
-		try{
-			String sql = "SELECT * FROM ";
-
-		}catch(Exception e){
-			throw new DaoException("Teu SQL ta com o seguinte erro: "+e.getMessage());
-		}
-		return arrayReturn;
-	}
-
 	public  boolean createTables() throws DaoException{
 		try{
 			String sql = "CREATE TABLE LOTE(ID_LOTE INT NOT NULL PRIMARY KEY,PRECO NUMERIC(10,2) NOT NULL)";
@@ -137,6 +115,7 @@ public class DerbyDAO implements DAO{
 		}
 		return true;
 	}
+	
 	@Override
 	public int updateCurrentId(String tableName) throws DaoException {
 		int num = 0;
@@ -165,12 +144,6 @@ public class DerbyDAO implements DAO{
 	@Override
 	public int getCurrentId() throws DaoException {
 		return updateCurrentId(this.table);
-	}
-
-	public static void main(String[] args) throws DaoException {
-		FacadePersistence s = new FacadePersistence();
-		String sql = "";
-		s.executeSQL(sql);
 	}
 	
 }

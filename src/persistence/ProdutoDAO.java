@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import business.Categoria;
 import business.Produto;
 
-public class ProdutoDAO extends DerbyDAO {
+public class ProdutoDAO extends DerbyDAO implements ProdutoDAOInteface {
 
 	@Override
-	public boolean add(Object prod) throws DaoException {	
+	public boolean add(Produto prod) throws DaoException {	
 		try{
 			String sql = "INSERT INTO PRODUTO VALUES(?,?,?,?)";
 			PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
-			ps.setInt(1, Integer.valueOf(((Produto)prod).getId_produto()));
-			ps.setString(2, String.valueOf(((Produto)prod).getCateg().name()));
-			ps.setString(3, ((Produto)prod).getDescBreve());
-			ps.setString(4, ((Produto)prod).getDescCompleta());
+			ps.setInt(1, Integer.valueOf(prod.getId_produto()));
+			ps.setString(2, String.valueOf(prod.getCateg().name()));
+			ps.setString(3, (prod.getDescBreve()));
+			ps.setString(4, (prod.getDescCompleta()));
 			ps.executeUpdate();
 			ps.close();
 		}catch(SQLException e){		
@@ -28,18 +28,18 @@ public class ProdutoDAO extends DerbyDAO {
 	}
 
 	@Override
-	public Object getById(String idProd){
-		for(Object i : this.getContentTable() ){
-			if(((Produto)i).getId_produto() == Integer.valueOf(idProd)){
-				Produto prodRetur = (Produto) i;
+	public Produto getById(String idProd){
+		for(Produto i : this.getContentTable() ){
+			if(i.getId_produto() == Integer.valueOf(idProd)){
+				Produto prodRetur =  i;
 				return i;		
 			}			
 		}	return null;
 	}
 
 	@Override
-	public ArrayList<Object> getContentTable(){
-		ArrayList<Object> arrayReturn = new ArrayList<>();
+	public ArrayList<Produto> getContentTable(){
+		ArrayList<Produto> arrayReturn = new ArrayList<>();
 		try{
 			String sql = "SELECT * FROM PRODUTO";
 			PreparedStatement ps = getConnection().prepareStatement(sql);
