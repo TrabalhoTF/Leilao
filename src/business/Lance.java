@@ -1,6 +1,7 @@
 package business;
 
 public class Lance {
+	private int idLance;
 	private String hora;
 	private String data;
 	private String cpf_cnpj;	
@@ -11,6 +12,18 @@ public class Lance {
 		setHora(hora);
 		setCpf_cnpj(cpf_cnpj);
 		setValor(valor);		
+	}
+	
+	public Lance(int idLance, String cpf_cnpj, String data, String hora, float valor){
+		setIDLance(idLance);
+		setData(data);
+		setHora(hora);
+		setCpf_cnpj(cpf_cnpj);
+		setValor(valor);		
+	}
+	
+	public int getIDLance(){
+		return this.idLance;
 	}
 
 	public String getCpf_cnpj() {
@@ -43,6 +56,10 @@ public class Lance {
 
 	public void setValor(float valor) {
 		this.valor = valor;
+	}
+	
+	public void setIDLance(int idLance){
+		this.idLance = idLance;
 	}
 	
 	@Override

@@ -3,14 +3,16 @@ package persistence;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
+import business.Application;
 import business.Categoria;
+import business.LeilaoException;
 import business.Lote;
 import business.Produto;
 
 public class LoteXProduto extends DerbyDAO implements LoteXProdutoDAO {
 
 	private int id;
-	
+
 	public LoteXProduto() throws DaoException {
 		this.id = getCurrentId();
 	}
@@ -41,19 +43,20 @@ public class LoteXProduto extends DerbyDAO implements LoteXProdutoDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public int getCurrentId() throws DaoException {
 		return super.updateCurrentId("LOTEXPRODUTO");
 	}
-	
-	public static void main(String[] args) throws DaoException {
-		LoteXProduto s = new LoteXProduto();
-		FacadePersistence t = new FacadePersistence();
-		
-		t.addLote(new Lote(1, 100));
-		t.addProd(new Produto(1, Categoria.AUTOMOVEL, "BREVE", "COMPLETA"));
-		t.addLoteXProduto(1,1);
-		System.out.println(s.getCurrentId());
+
+	public static void main(String[] args) {
+		try {
+			Application app = new Application();
+
+			app.getPersistenceFac().executeSQL("SELECT * FROM PRODUTO");
+		} catch (DaoException | LeilaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

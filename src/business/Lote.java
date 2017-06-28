@@ -12,6 +12,12 @@ public class Lote {
 		produtos = new ArrayList<Produto>();
 	}
 	
+	public Lote(float preco) {
+		setPreco(preco);
+		setId_lote(0);
+		produtos = new ArrayList<Produto>();
+	}
+	
 	public void setId_lote(int id_lote) {
 		this.id_lote = id_lote;
 	}

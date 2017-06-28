@@ -13,6 +13,13 @@ public class Produto {
 		setDescCompleta(descCompleta);		
 	}
 	
+	public Produto( Categoria categ, String descBreve, String descCompleta) {
+		setCateg(categ);
+		setId_produto(0);
+		setDescBreve(descBreve);
+		setDescCompleta(descCompleta);		
+	}
+	
 	public Categoria getCateg() {
 		return categ;
 	}

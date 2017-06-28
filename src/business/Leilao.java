@@ -20,8 +20,18 @@ public class Leilao {
 		this.ativo = ativo;
 		this.principal = principal;
 		this.data_inicio = data_inicio;
-		this.data_fim = data_fim;
-		
+		this.data_fim = data_fim;		
+		participantes = new ArrayList<Usuario>();
+	}
+	
+	public Leilao(boolean tipo, boolean ativo, Usuario principal, String data_inicio, String data_fim) {
+		super();
+		this.id_leilao = 0;
+		this.tipo = tipo;
+		this.ativo = ativo;
+		this.principal = principal;
+		this.data_inicio = data_inicio;
+		this.data_fim = data_fim;		
 		participantes = new ArrayList<Usuario>();
 	}
 	
@@ -42,7 +52,6 @@ public class Leilao {
 		return aux;
 	}
 
-
 	public int getId_leilao() {
 		return id_leilao;
 	}
@@ -52,31 +61,25 @@ public class Leilao {
 		this.id_leilao = id_leilao;
 	}
 
-
 	public boolean isTipo() {
 		return tipo;
 	}
-
 
 	public void setTipo(boolean tipo) {
 		this.tipo = tipo;
 	}
 
-
 	public boolean isAtivo() {
 		return ativo;
 	}
-
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
 
-
 	public Usuario getPrincipal() {
 		return principal;
 	}
-
 
 	public void setPrincipal(Usuario principal) {
 		this.principal = principal;
