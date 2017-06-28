@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import persistence.DaoException;
+import persistence.FacadePersistence;
 
 public class LeilaoFachada { 
 	
@@ -13,12 +14,16 @@ public class LeilaoFachada {
 	private ArrayList<Lote> listaLote;
 	private ArrayList<Leilao> listaLeilao;
 	
+	private FacadePersistence fachadaDao;
+	
 	private HashMap<Integer, Lote> mapId_leilaoLote;
 	
 	
 	public LeilaoFachada() throws LeilaoException{	
 		
 		try {
+			fachadaDao = new FacadePersistence();
+			
 			listaUsuarios = new ArrayList<Usuario>();
 			listaProdutos = new ArrayList<Produto>();
 			listaLote = new ArrayList<Lote>();		
@@ -26,8 +31,8 @@ public class LeilaoFachada {
 			
 			mapId_leilaoLote = new HashMap<Integer, Lote>();
 			
-		} catch (Exception e) {
-			throw new LeilaoException("ERRO AO CRIAR A FACHADA! ");
+		} catch (DaoException e) {
+			throw new LeilaoException("ERRO AO CRIAR A FACHADA!", e);
 		}		
 		
 		
@@ -60,22 +65,32 @@ public class LeilaoFachada {
 			throw new LeilaoException("Usuário já cadastrado!");
 		}
 
-		if(cont == 2){
+		if(cont == 2){			
+			try {
+				fachadaDao.addUser(usuario);
+			} catch (DaoException e) {
+				throw new LeilaoException("Erro ao cadastrar usuario! ", e);
+			}
+			
 			usuario = new Usuario(cnpj_cpf, nome, email);
-			listaUsuarios.add(usuario);
 			aux = true;
 		} 
 
 		return aux;
 	}
 
-	public ArrayList<Usuario> getListaUsuario(){
-		return listaUsuarios;
+	public ArrayList<Usuario> getListaUsuario() throws Exception{
+		try {
+			return fachadaDao.getArrayUsers();
+		} catch (DaoException e) {
+			throw new LeilaoException("Erro ao cadastrar usuario! ", e);
+		}
 	}
 
 	public boolean cadastrarProduto(int id_produto, Categoria categ, String descBreve, String descCompleta) throws DaoException{		
-		Produto produto = new Produto(id_produto, categ, descBreve, descCompleta);		
-		return listaProdutos.add(produto);		
+		Produto produto = new Produto(id_produto, categ, descBreve, descCompleta);			
+		
+		return fachadaDao.addProd(produto);	
 	}
 	
 	public boolean criarLoteAdtibuirLeilao(int id_leilao, int id_lote, float preco) throws LeilaoException{
@@ -87,6 +102,13 @@ public class LeilaoFachada {
 			
 			if(mapId_leilaoLote.containsKey(id_leilao)== false){
 				mapId_leilaoLote.put(id_leilao, lote);
+				
+				try {
+					fachadaDao.addLote(lote);
+				} catch (DaoException e) {
+					throw new LeilaoException("Erro ao cadastrar usuario! ", e);
+				}
+				
 				aux = true;
 			}else{
 				new LeilaoException("Já existe um lote cadastrado para esse leilao!");
@@ -95,8 +117,7 @@ public class LeilaoFachada {
 		}else{
 			new LeilaoException("Lote não cadastrado! Atribuia a ele um valor válido!");
 		}				
-		
-			
+					
 		return aux;		
 	}
 	
