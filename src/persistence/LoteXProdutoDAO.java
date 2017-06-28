@@ -35,18 +35,15 @@ public class LoteXProdutoDAO extends DerbyDAO implements LoteXProdutoDAOInteface
 	@Override
 	public ArrayList<Integer> getById(int idLote, int idProd) throws DaoException {
 		ArrayList<Integer> retorno = new ArrayList<>();
-
 		try{
 			ArrayList<Integer> arrayCompare = Main.fachadaPersistence.getArrayLoteXProd();
 			for(int i = 0 ; i < arrayCompare.size();  i++){	
-				if(arrayCompare.get(i).g
-
-			}catch(Exception e){
-				throw new DaoException("\n Erro no retorno da relação entre Lote e Produto, veja:\n "+e.getMessage());
+				//if(arrayCompare.get(i).g
 			}
-
-			return null;
+		}catch(Exception e){
+			throw new DaoException("\n Erro no retorno da relação entre Lote e Produto, veja:\n "+e.getMessage());
 		}
+		return null;
 	}
 
 	@Override
