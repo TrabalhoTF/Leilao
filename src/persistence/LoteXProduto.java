@@ -54,6 +54,8 @@ public class LoteXProduto extends DerbyDAO implements LoteXProdutoDAO {
 			Application app = new Application();
 
 			app.getPersistenceFac().executeSQL("SELECT * FROM PRODUTO");
+			
+			
 		} catch (DaoException | LeilaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

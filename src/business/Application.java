@@ -6,9 +6,9 @@ import view.Fachada;
 
 public class Application {
 	
-	public static FacadePersistence persistenceFac;
-	public static Fachada viewFac;
-	public static LeilaoFachada leilaoFac;
+	private FacadePersistence persistenceFac;
+	private Fachada viewFac;
+	private LeilaoFachada leilaoFac;
 	
 	public Application() throws DaoException, LeilaoException{
 		this.persistenceFac = new FacadePersistence();
@@ -16,24 +16,24 @@ public class Application {
 		this.leilaoFac = new LeilaoFachada();
 	}
 	
-	public static FacadePersistence getPersistenceFac() {
+	public  FacadePersistence getPersistenceFac() {
 		return persistenceFac;
 	}
-	public static void setPersistenceFac(FacadePersistence persistenceFac) {
-		Application.persistenceFac = persistenceFac;
+	public  void setPersistenceFac(FacadePersistence persistenceFac) {
+		this.persistenceFac = persistenceFac;
 	}
-	public static LeilaoFachada getLeilaoFac() {
+	public  LeilaoFachada getLeilaoFac() {
 		return leilaoFac;
 	}
 
-	public static void setLeilaoFac(LeilaoFachada leilaoFac) {
-		Application.leilaoFac = leilaoFac;
+	public  void setLeilaoFac(LeilaoFachada leilaoFac) {
+		this.leilaoFac = leilaoFac;
 	}
 
-	public static Fachada getViewFac() {
+	public  Fachada getViewFac() {
 		return viewFac;
 	}
-	public static void setViewFac(Fachada viewFac) {
-		Application.viewFac = viewFac;
+	public  void setViewFac(Fachada viewFac) {
+		this.viewFac = viewFac;
 	}	
 }
