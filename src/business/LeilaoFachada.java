@@ -73,8 +73,8 @@ public class LeilaoFachada {
 		return listaUsuarios;
 	}
 
-	public boolean cadastrarProduto(Produto prod) throws DaoException{		
-		Produto produto = prod;		
+	public boolean cadastrarProduto(int id_produto, Categoria categ, String descBreve, String descCompleta) throws DaoException{		
+		Produto produto = new Produto(id_produto, categ, descBreve, descCompleta);		
 		return listaProdutos.add(produto);		
 	}
 	
@@ -82,7 +82,7 @@ public class LeilaoFachada {
 		Lote lote;
 		boolean aux = false;
 		if(ValidadorDados.validarValor(preco)){
-			lote = new Lote(preco);
+			lote = new Lote(id_lote, preco);
 			aux = listaLote.add(lote);
 			
 			if(mapId_leilaoLote.containsKey(id_leilao)== false){
@@ -117,7 +117,9 @@ public class LeilaoFachada {
 				}
 
 			}			
-		}				
+		}		
+
+		
 		if(prodAux == null){
 			new LeilaoException("Produto não encontrado!");
 		} else {
@@ -140,7 +142,8 @@ public class LeilaoFachada {
 			if(usu.getCnpj_cpf().equalsIgnoreCase(cpf_cnpj)){
 				usuarioAux = usu;	
 			}
-		}		
+		}
+		
 		if(ValidadorDados.compararDatas(data_inicio, data_fim) == 1){
 			cont = cont +1;						
 		}else if(ValidadorDados.compararDatas(data_inicio, data_fim) == -1){
@@ -161,10 +164,12 @@ public class LeilaoFachada {
 					cont = 0;					
 				}				
 			}
-		}		
+		}
+		
+		
 		if(cont == 2){
 			aux = true;
-			Leilao leilaoAux = new Leilao(tipo, ativo, usuarioAux, data_inicio, data_fim);	
+			Leilao leilaoAux = new Leilao(id_leilao, tipo, ativo, usuarioAux, data_inicio, data_fim);	
 			listaLeilao.add(leilaoAux);
 		} else {
 			new LeilaoException("Leilao já existente!");

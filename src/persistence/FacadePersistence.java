@@ -12,12 +12,12 @@ public class FacadePersistence {
 
 	private LoteDAO loteDAO = new LoteDAO();
 	private DerbyDAO derbyDAO = new DerbyDAO();
-	private LoteXProdutoDAO lotexprod = new LoteXProdutoDAO();
+	private LoteXProduto lotexprod = new LoteXProduto();
 	private ProdutoDAO produtoDAO = new ProdutoDAO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 	public FacadePersistence() throws DaoException{
-		this.lotexprod = new LoteXProdutoDAO();
+		this.lotexprod = new LoteXProduto();
 	}
 	
 	public boolean  addUser(Usuario user) throws DaoException{

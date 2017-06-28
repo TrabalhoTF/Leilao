@@ -66,8 +66,4 @@ public class UsuarioDAO extends DerbyDAO{
 		}
 	}
 
-	@Override
-	public int getCurrentId() throws DaoException {
-		return super.updateCurrentId("USUARIO");
-	}
 }

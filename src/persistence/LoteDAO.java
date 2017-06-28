@@ -51,7 +51,7 @@ public class LoteDAO extends DerbyDAO{
 			ResultSet rs = ps.getResultSet();
 
 			while(rs.next()){
-				arrayReturn.add(rs.getFloat("PRECO") );
+				arrayReturn.add(new Lote(rs.getInt("ID_LOTE"), rs.getFloat("PRECO") ));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

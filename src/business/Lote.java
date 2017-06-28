@@ -1,24 +1,16 @@
 package business;
 
 import java.util.ArrayList;
-
 public class Lote {
 	private int id_lote;	
 	private float preco;
 	private ArrayList<Produto> produtos;
-	
-	public Lote( float preco) {
-		setPreco(preco);
-		setId_lote(0);
-		produtos = new ArrayList<Produto>();
-	}
 	
 	public Lote(int id_lote, float preco) {
 		setPreco(preco);
 		setId_lote(id_lote);
 		produtos = new ArrayList<Produto>();
 	}
-
 	
 	public void setId_lote(int id_lote) {
 		this.id_lote = id_lote;

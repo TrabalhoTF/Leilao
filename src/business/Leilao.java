@@ -13,17 +13,6 @@ public class Leilao {
 	private ArrayList<Usuario> participantes;
 	
 	
-	public Leilao( boolean tipo, boolean ativo, Usuario principal, String data_inicio, String data_fim) {
-		super();
-		this.id_leilao = id_leilao;
-		this.tipo = tipo;
-		this.ativo = ativo;
-		this.principal = principal;
-		this.data_inicio = data_inicio;
-		this.data_fim = data_fim;		
-		participantes = new ArrayList<Usuario>();
-	}
-	
 	public Leilao(int id_leilao, boolean tipo, boolean ativo, Usuario principal, String data_inicio, String data_fim) {
 		super();
 		this.id_leilao = id_leilao;
@@ -31,7 +20,8 @@ public class Leilao {
 		this.ativo = ativo;
 		this.principal = principal;
 		this.data_inicio = data_inicio;
-		this.data_fim = data_fim;		
+		this.data_fim = data_fim;
+		
 		participantes = new ArrayList<Usuario>();
 	}
 	
