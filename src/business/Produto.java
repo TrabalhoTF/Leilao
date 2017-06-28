@@ -6,6 +6,13 @@ public class Produto {
 	private String descBreve;
 	private String descCompleta;
 	
+	public Produto(Categoria categ, String descBreve, String descCompleta) {
+		setCateg(categ);
+		setId_produto(0);
+		setDescBreve(descBreve);
+		setDescCompleta(descCompleta);		
+	}
+	
 	public Produto(int id_produto, Categoria categ, String descBreve, String descCompleta) {
 		setCateg(categ);
 		setId_produto(id_produto);

@@ -137,6 +137,7 @@ public class DerbyDAO implements DAO{
 		}
 		return true;
 	}
+	
 	@Override
 	public int updateCurrentId(String tableName) throws DaoException {
 		int num = 0;

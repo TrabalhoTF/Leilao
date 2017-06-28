@@ -1,10 +1,9 @@
 package unitTest;
 
 import business.Categoria;
-import business.Leilao;
 import business.LeilaoException;
 import business.LeilaoFachada;
-import business.Usuario;
+import business.Produto;
 import persistence.DaoException;
 
 public class TesteFachadaSemJunit {
@@ -45,9 +44,10 @@ public class TesteFachadaSemJunit {
 			fachada.cadastrarUsuario("02.002.003/0001-89", "João", "jose@jose.com.br");
 			fachada.cadastrarUsuario("03.002.003/0001-89", "Jorge", "jose@jose.com.br");
 			
-					
-			fachada.cadastrarProduto(22222, Categoria.INFORMATICA, "alguma coisa", "alguma coisa a mais");
-			fachada.cadastrarProduto(22223, Categoria.INFORMATICA, "alguma coisa2", "alguma coisa a mais2");
+			Produto p = new Produto(22222,Categoria.INFORMATICA, "alguma coisa", "alguma coisa a mais");
+			fachada.cadastrarProduto(p);
+			p.setDescCompleta("alguma coisa2");
+			fachada.cadastrarProduto(p);
 			
 			fachada.criarLeilao(55555, false, true, "01.002.003/0001-89" , "22/02/2012", "22/03/2012");
 			
