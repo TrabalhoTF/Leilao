@@ -1,61 +1,53 @@
 package business;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import com.sun.org.apache.regexp.internal.recompile;
 
 public class Leilao {
 	private int id_leilao;
-	private boolean tipo, ativo;
+	private boolean tipo, ativo;// para o tipo caberia melhor um enum, mas
+								// coloquei na persistencia para aceitar (0)zero
+								// para demanda e (1)um para oferta
 	private Usuario principal;
-	private String data_inicio, data_fim;
-	private ArrayList<Usuario> participantes;
-	
-	
-	public Leilao(int id_leilao, boolean tipo, boolean ativo, Usuario principal, String data_inicio, String data_fim) {
+	private LocalDate data_inicio, data_fim;
+	private Lote lote;
+
+	public Leilao(int id_leilao, Lote lote, boolean tipo, boolean ativo, Usuario principal, LocalDate data_inicio,
+			LocalDate data_fim) {
 		super();
+		this.lote = lote;
 		this.id_leilao = id_leilao;
 		this.tipo = tipo;
 		this.ativo = ativo;
 		this.principal = principal;
 		this.data_inicio = data_inicio;
-		this.data_fim = data_fim;		
-		participantes = new ArrayList<Usuario>();
+		this.data_fim = data_fim;
 	}
-	
-	public Leilao(boolean tipo, boolean ativo, Usuario principal, String data_inicio, String data_fim) {
+
+	public Leilao(boolean tipo, boolean ativo, Lote lote, Usuario principal, LocalDate data_inicio,
+			LocalDate data_fim) {
 		super();
+		this.lote = lote;
 		this.id_leilao = 0;
 		this.tipo = tipo;
 		this.ativo = ativo;
 		this.principal = principal;
 		this.data_inicio = data_inicio;
-		this.data_fim = data_fim;		
-		participantes = new ArrayList<Usuario>();
+		this.data_fim = data_fim;
+		;
 	}
-	
-	public boolean  adicionarParticipante(Usuario usuario) {
-		
-		boolean aux = true;
-		
-		for(Usuario usu: participantes){
-			if(usu.getCnpj_cpf().equalsIgnoreCase(usuario.getCnpj_cpf())){
-				aux = false;				
-			}			
-		}
-		
-		if(aux == true){
-			participantes.add(usuario);			
-		}
-		
-		return aux;
+
+	public Lote getLote() {
+		return lote;
+	}
+
+	public void setLote(Lote lote) {
+		this.lote = lote;
 	}
 
 	public int getId_leilao() {
 		return id_leilao;
 	}
-
 
 	public void setId_leilao(int id_leilao) {
 		this.id_leilao = id_leilao;
@@ -85,34 +77,20 @@ public class Leilao {
 		this.principal = principal;
 	}
 
-
-	public String getData_inicio() {
+	public LocalDate getData_inicio() {
 		return data_inicio;
 	}
 
-
-	public void setData_inicio(String data_inicio) {
+	public void setData_inicio(LocalDate data_inicio) {
 		this.data_inicio = data_inicio;
 	}
 
-
-	public String getData_fim() {
+	public LocalDate getData_fim() {
 		return data_fim;
 	}
 
-
-	public void setData_fim(String data_fim) {
+	public void setData_fim(LocalDate data_fim) {
 		this.data_fim = data_fim;
 	}
-
-
-	public ArrayList<Usuario> getParticipantes() {
-		return participantes;
-	}
-	
-	
-	
-	
-	
 
 }

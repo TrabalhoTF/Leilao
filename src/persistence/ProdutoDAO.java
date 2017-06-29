@@ -14,7 +14,7 @@ public class ProdutoDAO extends DerbyDAO implements ProdutoDAOInteface {
 		try{
 			String sql = "INSERT INTO PRODUTO VALUES(?,?,?,?)";
 			PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
-			ps.setInt(1, Integer.valueOf(prod.getId_produto()));
+			ps.setInt(1, getCurrentId());
 			ps.setString(2, String.valueOf(prod.getCateg().name()));
 			ps.setString(3, (prod.getDescBreve()));
 			ps.setString(4, (prod.getDescCompleta()));
@@ -65,4 +65,8 @@ public class ProdutoDAO extends DerbyDAO implements ProdutoDAOInteface {
 		}
 	}
 
+	@Override
+	public int getCurrentId() throws DaoException {
+	 	return super.updateCurrentId("PRODUTO");
+	 	}
 }

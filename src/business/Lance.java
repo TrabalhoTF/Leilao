@@ -5,16 +5,37 @@ public class Lance {
 	private String hora;
 	private String data;
 	private String cpf_cnpj;	
+	private int idLeilao;
 	private float valor;
 	
-	public Lance(String cpf_cnpj, String data, String hora, float valor){
+	public int getIdLance() {
+		return idLance;
+	}
+
+	public void setIdLance(int idLance) {
+		this.idLance = idLance;
+	}
+
+	public int getIdLeilao() {
+		return idLeilao;
+	}
+
+	public void setIdLeilao(int idLeilao) {
+		this.idLeilao = idLeilao;
+	}
+
+;
+	
+	public Lance(String cpf_cnpj, int idLeilao, String data, String hora, float valor){
+		setIdLeilao(idLeilao);
 		setData(data);
 		setHora(hora);
 		setCpf_cnpj(cpf_cnpj);
 		setValor(valor);		
 	}
 	
-	public Lance(int idLance, String cpf_cnpj, String data, String hora, float valor){
+	public Lance(int idLance, int idLeilao, String cpf_cnpj, String data, String hora, float valor){
+		setIdLeilao(idLeilao);
 		setIDLance(idLance);
 		setData(data);
 		setHora(hora);
