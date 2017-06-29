@@ -13,10 +13,6 @@ public class LoteXProdutoDAO extends DerbyDAO implements LoteXProdutoDAOInterfac
 
 	private int id;
 
-	public LoteXProdutoDAO() throws DaoException {
-		this.id = getCurrentId();
-	}
-
 	@Override
 	public boolean addLoteXProd(int idLote, int idProd) throws DaoException {		
 		try{
