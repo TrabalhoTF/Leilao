@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Leilao {
 	private int id_leilao;
 	private boolean tipo, ativo;// para o tipo caberia melhor um enum, mas
-								// coloquei na persistencia para aceitar (0)zero
-								// para demanda e (1)um para oferta
+								// coloquei na persistencia para aceitar true
+								// para demanda e false para oferta
 	private Usuario principal;
 	private LocalDate data_inicio, data_fim;
 	private Lote lote;

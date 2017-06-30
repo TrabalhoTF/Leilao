@@ -83,15 +83,6 @@ public class LoteXProdutoDAO extends DerbyDAO implements LoteXProdutoDAOInterfac
 	}
 
 	public static void main(String[] args) {
-		try {
-			FacadePersistence f = new  FacadePersistence();
-			System.out.println(f.getByIdArrayListLoteXProd(3));			
-			System.out.println("Result: "+f.executeSQL("SELECT  ID_LOTEXPROD FROM LOTEXPRODUTO"));
-
-
-		} catch (DaoException w ) {
-			// TODO Auto-generated catch block
-			w.printStackTrace();
-		}
+	
 	}
 }

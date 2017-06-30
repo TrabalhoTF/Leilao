@@ -1,11 +1,12 @@
 package persistence;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import business.Leilao;
-import business.Lote;
+import business.Usuario;
 
 public class LeilaoDAO  extends DerbyDAO implements LeilaoDAOInterface{
 
@@ -35,7 +36,7 @@ public class LeilaoDAO  extends DerbyDAO implements LeilaoDAOInterface{
 		try {
 			for (Leilao i : this.getContentTable()) {
 				if (i.getId_leilao() == Integer.valueOf(idLeilao)) {
-						return i;
+					return i;
 				}
 			}
 		} catch (Exception e) {
@@ -46,15 +47,35 @@ public class LeilaoDAO  extends DerbyDAO implements LeilaoDAOInterface{
 
 	@Override
 	public ArrayList<Leilao> getContentTable() throws DaoException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Leilao> arrayReturn = new ArrayList<Leilao>();
+		try{
+			String sql = "SELECT * FROM LOTEXPRODUTO";
+			PreparedStatement ps = getConnection().prepareStatement(sql);
+			ps.executeQuery();
+			ResultSet rs = ps.getResultSet();	
+			while(rs.next()){
+				arrayReturn.add(new Leilao(rs.getInt("ID_LEILAO"),
+								         new LoteDAO().getById(rs.getInt("ID_LOTE")),  
+								         (rs.getInt("ATIVO") == 1?true:false), 
+								         (rs.getString("TIPO").equals("DEMANDA")?true: false), 
+						                  new UsuarioDAO().getById(String.valueOf(rs.getInt("ID_VENDEDOR"))),
+						                  rs.getDate("DATA_INICIO").toLocalDate(), 
+						                  rs.getDate("DATE_FIM").toLocalDate()));
+			}
+
+		}catch(SQLException e){
+			throw new DaoException("Não foi possível completar a busca, revisar os parâmetros: "+e.getMessage());
+		}
+		if(arrayReturn.size() == 0){
+			System.out.println("Nenhum registro na tabela LEILAO");
+			return null;
+		}else{
+			return arrayReturn;
+		}
 	}
 
 	@Override
 	public int getCurrentId() throws DaoException {
 		return super.updateCurrentId("LEILAO");
 	}
-
-	
-	
 }

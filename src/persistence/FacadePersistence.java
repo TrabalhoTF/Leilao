@@ -2,6 +2,7 @@ package persistence;
 
 import java.util.ArrayList;
 
+import business.Leilao;
 import business.Lote;
 import business.Produto;
 import business.Usuario;
@@ -51,6 +52,14 @@ public class FacadePersistence {
 		return this.derbyDAO.executeSQL(sql);
 	}
 
+	public ArrayList<Leilao> getArrayListLeilao() throws DaoException{
+		return this.leilaoDAO.getContentTable();
+	}
+	
+	public Leilao getLeilaoById(int idLeilao) throws DaoException{
+		return this.leilaoDAO.getById(idLeilao);
+	}	
+	
 	public ArrayList<Usuario> getArrayListUsers() throws DaoException{		
 		return this.usuarioDAO.getContentTable();
 	}
