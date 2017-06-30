@@ -1,5 +1,6 @@
 package business;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -166,8 +167,20 @@ public class LeilaoFachada {
 		return null;
 	}	
 	
-	//cadastra um leilão
-	public boolean cadastrarLeilao(){
+	// cadastra um leilão
+	// Tipo: true para leilão normal
+	// 		 false para leilao por demanda
+	
+	// Ativo: true para se esta ativo
+	//        false para terminado
+	public boolean cadastrarLeilao(boolean tipo, boolean ativo, Lote lote, Usuario principal, LocalDate data_inicio, LocalDate data_fim){
+		
+		Leilao leilao = new Leilao(tipo, ativo, lote, principal, data_inicio, data_fim);
+		
+		// Falata adicionar o leilão no banco de dados;
+		//fachadaDao		
+		
+		
 		return false;
 	}
 }

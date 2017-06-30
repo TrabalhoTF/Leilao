@@ -38,9 +38,8 @@ public class ValidadorDados {
 	public static boolean validarData(String data){
 		String dateFormat = "dd/MM/uuuu";
 
-	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-	    .ofPattern(dateFormat)
-	    .withResolverStyle(ResolverStyle.STRICT);
+	    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat).withResolverStyle(ResolverStyle.STRICT);
+	    
 	    try {
 	        LocalDate date = LocalDate.parse(data, dateTimeFormatter);
 	        return true;
@@ -53,8 +52,6 @@ public class ValidadorDados {
 		String aux = null;
 		int cont = 0;
 		
-		
-		
 		// 000.000.000-00
 		if(cpf.replace(".","").replace("-","").length() == 11){
 			if(cpf.substring(3,4).equals(".") && cpf.substring(7,8).equals(".") && cpf.substring(11,12).equals("-") ){
@@ -64,9 +61,7 @@ public class ValidadorDados {
 						cont +=1;
 				}			
 			}			
-		}
-		//System.out.println(cpf.substring(3,4)+ " " + cpf.substring(7,8)+ " " + cpf.substring(11,12)+ " ");
-		
+		}		
 		
 		// XX.XXX.XXX/0001-XX
 		if(cpf.replace(".","").replace("-","").replace("/","").length() == 14){
@@ -78,8 +73,6 @@ public class ValidadorDados {
 			}
 
 		}
-		
-		//System.out.println(cpf.substring(2,3)+" "+cpf.substring(6,7)+" "+ cpf.substring(10,11)+" "+cpf.substring(15,16)+" ");
 		
 		if(cont == 11){
 			aux = cpf;			
