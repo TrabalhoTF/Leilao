@@ -28,7 +28,6 @@ public class LoteDAO extends DerbyDAO implements LoteDAOInteface {
 
 	@Override
 	public Lote getById(String idLote) throws DaoException {
-
 		try {
 			for (Lote i : this.getContentTable()) {
 

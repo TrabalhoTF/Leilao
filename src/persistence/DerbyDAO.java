@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import business.Application;
 import business.LeilaoException;
 
 /**
@@ -31,7 +29,7 @@ public class DerbyDAO implements DAO {
 		return DriverManager.getConnection("jdbc:derby:derbyDB");
 	}
 
-	public boolean executeSQL(String sql) throws DaoException {
+	public static boolean executeSQL(String sql) throws DaoException {
 		try {
 			sql = sql.toUpperCase();
 			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
@@ -58,7 +56,7 @@ public class DerbyDAO implements DAO {
 		return true;
 	}
 
-	public boolean reestartDb() throws DaoException {
+	public static boolean reestartDb() throws DaoException {
 		try {
 			PreparedStatement ps = null;
 			ArrayList<String> sql = new ArrayList<>();
@@ -82,7 +80,7 @@ public class DerbyDAO implements DAO {
 		return true;
 	}
 
-	public boolean createTables() throws DaoException {
+	public static boolean createTables() throws DaoException {
 		try {
 			String sql = "CREATE TABLE LOTE(ID_LOTE INT NOT NULL PRIMARY KEY,PRECO NUMERIC(10,2) NOT NULL)";
 			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
@@ -124,14 +122,10 @@ public class DerbyDAO implements DAO {
 
 			PreparedStatement ps = DerbyDAO.getConnection().prepareStatement(sql);
 			ps.executeQuery();
-
 			ResultSet rs = ps.getResultSet();
-
 			while (rs.next()) {
 				num++;
-				System.out.println(sql);
 			}
-
 			ps.close();
 			rs.close();
 		} catch (Exception e) {

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import business.Leilao;
+import business.Lote;
 
 public class LeilaoDAO  extends DerbyDAO implements LeilaoDAOInterface{
 
@@ -31,7 +32,17 @@ public class LeilaoDAO  extends DerbyDAO implements LeilaoDAOInterface{
 
 	@Override
 	public Leilao getById(String id) throws DaoException {
-		// TODO Auto-generated method stub
+		try {
+			for (Lote i : this.getContentTable()) {
+
+				if (i.getId_lote() == Integer.valueOf(idLote)) {
+					Lote loteRetur = (Lote) i;
+					return i;
+				}
+			}
+		} catch (Exception e) {
+			throw new DaoException("Não foi possível completar a busca, revisar os parâmetros: " + e.getMessage());
+		}
 		return null;
 	}
 

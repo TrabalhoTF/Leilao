@@ -50,7 +50,7 @@ public class FacadePersistence {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<Usuario> getArrayUsers() throws DaoException{		
+	public ArrayList<Usuario> getArrayListUsers() throws DaoException{		
 		ArrayList<Usuario> usr = new ArrayList<>();
 		int cont = 0;
 		for(Usuario usr1: this.usuarioDAO.getContentTable()){
@@ -61,7 +61,7 @@ public class FacadePersistence {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<Produto> getArrayProd() throws DaoException{
+	public ArrayList<Produto> getArrayListProd() throws DaoException{
 		ArrayList<Produto> prod = new ArrayList<>();
 		int cont = 0;
 		for(Produto pr: this.produtoDAO.getContentTable()){
