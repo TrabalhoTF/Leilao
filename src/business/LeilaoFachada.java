@@ -162,12 +162,12 @@ public class LeilaoFachada {
 	
 	// retorna uma lista de produtos apartir do id do lote
 	public ArrayList<Produto> buscaListaProdutosIdLote(int id_lote ) throws DaoException{
-		ArrayList<Produto> listaProd = fachadaDao.getArrayListProd();
-		ArrayList<Integer> listaIdProduto = fachadaDao.getArrayListLoteXProd();
-		ArrayList<Produto> listaProdFinal = new ArrayList<Produto>();
 		
-		
-
 		return null;
 	}	
+	
+	//cadastra um leilão
+	public boolean cadastrarLeilao(){
+		return false;
+	}
 }
