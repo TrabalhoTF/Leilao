@@ -8,7 +8,7 @@ public interface LeilaoDAOInterface {
 
 		public boolean add(Leilao leilao) throws DaoException;
 
-		public Leilao getById(String id) throws DaoException;
+		public Leilao getById(int id) throws DaoException;
 
 		public ArrayList<Leilao> getContentTable() throws DaoException;
 	

@@ -15,6 +15,8 @@ public class FacadePersistence {
 	private LoteXProdutoDAO lotexprod = new LoteXProdutoDAO();
 	private ProdutoDAO produtoDAO = new ProdutoDAO();
 	private UsuarioDAO usuarioDAO = new UsuarioDAO();
+	private LeilaoDAO leilaoDAO = new LeilaoDAO();
+	private LanceDAO lanceDAO = new LanceDAO();
 
 	public FacadePersistence() throws DaoException{
 		this.lotexprod = new LoteXProdutoDAO();
@@ -49,46 +51,24 @@ public class FacadePersistence {
 		return this.derbyDAO.executeSQL(sql);
 	}
 
-	@SuppressWarnings("unchecked")
 	public ArrayList<Usuario> getArrayListUsers() throws DaoException{		
-		ArrayList<Usuario> usr = new ArrayList<>();
-		int cont = 0;
-		for(Usuario usr1: this.usuarioDAO.getContentTable()){
-			usr.add(usr1);
-			cont++;
-		}		
-		return usr;
+		return this.usuarioDAO.getContentTable();
 	}
 
-	@SuppressWarnings("unchecked")
 	public ArrayList<Produto> getArrayListProd() throws DaoException{
-		ArrayList<Produto> prod = new ArrayList<>();
-		int cont = 0;
-		for(Produto pr: this.produtoDAO.getContentTable()){
-			prod.add(pr);
-			cont++;
-		}		
-		return prod;		
+		return this.produtoDAO.getContentTable();
 	}
 
-	@SuppressWarnings("unchecked")
 	public ArrayList<Lote> getArrayListLote() throws DaoException{
-		ArrayList<Lote> lote = new ArrayList<>();
-		for(int i = 0 ; i < loteDAO.getContentTable().size() ; i++){
-			lote.add(this.loteDAO.getContentTable().get(i));
-		}		
-		return lote;		
+		return this.loteDAO.getContentTable();		
 	}
 
-	@SuppressWarnings("unchecked")
 	public ArrayList<Integer> getArrayListLoteXProd() throws DaoException{
-		ArrayList<Integer> lotexprod = new ArrayList<>();
-		int cont = 0;
-		for(int lp: this.lotexprod.getContentTab()){
-			lotexprod.add(lp);
-			cont++;
-		}		
-		return lotexprod;		
+		return this.lotexprod.getContentTab();
+	}
+
+	public ArrayList<Integer> getByIdArrayListLoteXProd(int idLotexProd) throws DaoException{
+		return this.lotexprod.getById(idLotexProd);
 	}
 
 }

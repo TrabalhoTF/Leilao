@@ -4,11 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import business.Categoria;
-import business.LeilaoException;
-import business.Lote;
-import business.Produto;
-import business.Usuario;
+
+import org.junit.runners.Parameterized.Parameters;
+
 
 public class LoteXProdutoDAO extends DerbyDAO implements LoteXProdutoDAOInterface {
 
@@ -30,21 +28,29 @@ public class LoteXProdutoDAO extends DerbyDAO implements LoteXProdutoDAOInterfac
 
 	@Override
 	public ArrayList<Integer> getById(int idLotexProd) throws DaoException {
+		ArrayList<Integer> arrayRetorno = new ArrayList<>();
+		System.out.println(((idLotexProd*2)+idLotexProd) );
+		try {
+			for(int i =((idLotexProd*2)+idLotexProd) , j=((idLotexProd*2)+idLotexProd) ; i < this.getContentTab().size() ; ){
+				int comp =this.getContentTab().get(j);
+				if (j == this.getContentTab().get(j)) {
+					arrayRetorno.add(this.getContentTab().get(j++));
+					arrayRetorno.add(this.getContentTab().get(j++));
+					arrayRetorno.add(this.getContentTab().get(j++));
+					return arrayRetorno;
+				}i+=2; j++;
+			}
+		} catch (Exception e) {
+			throw new DaoException("Não foi possível completar a busca, revisar os parâmetros: " + e.getMessage());
+		}
 		return null;
-		//		try {
-		//			for (Lote i : this.getContentTable()) {
-		//
-		//				if (i.getId_lote() == Integer.valueOf(idLote)) {
-		//					Lote loteRetur = (Lote) i;
-		//					return i;
-		//				}
-		//			}
-		//		} catch (Exception e) {
-		//			throw new DaoException("Não foi possível completar a busca, revisar os parâmetros: " + e.getMessage());
-		//		}
-		//		return null;
 	}
 
+	/**@return
+	 * a representacao da tabela LoteXProduto, 
+	 * que eh composto por   | IdLotexProd | IdLote | idProd | 
+	 * porém, as colunas irao vir na sequencia de um arrayList<Integer>
+	 * */	
 	@Override
 	public ArrayList<Integer> getContentTab() throws DaoException {
 		ArrayList<Integer> arrayReturn = new ArrayList<>();
@@ -53,15 +59,13 @@ public class LoteXProdutoDAO extends DerbyDAO implements LoteXProdutoDAOInterfac
 			PreparedStatement ps = getConnection().prepareStatement(sql);
 			ps.executeQuery();
 			ResultSet rs = ps.getResultSet();
-			int  i =1;
-			
+			int col = 1;		
 			while(rs.next()){
-				while(i < i+2){
-					arrayReturn.add(rs.getInt(i));
-					i++;
-				}i = 1;
+				while(col <= 3){
+					arrayReturn.add(rs.getInt(col++));
+				}col = 1; 
 			}
-			
+
 		}catch(SQLException e){
 			throw new DaoException("Não foi possível completar a busca, revisar os parâmetros: "+e.getMessage());
 		}
@@ -81,18 +85,9 @@ public class LoteXProdutoDAO extends DerbyDAO implements LoteXProdutoDAOInterfac
 	public static void main(String[] args) {
 		try {
 			FacadePersistence f = new  FacadePersistence();
-			//		app.getPersistenceFac().addProd(new Produto(Categoria.INFORMATICA, "bom", "barato"));
-			//	System.out.println(app.getPersistenceFac().getArrayListProd().get(0).getId_produto());
-			//app.getPersistenceFac().addLoteXProduto(0, 0);
+			System.out.println(f.getByIdArrayListLoteXProd(3));			
+			System.out.println("Result: "+f.executeSQL("SELECT  ID_LOTEXPROD FROM LOTEXPRODUTO"));
 
-			//System.out.println(app.getPersistenceFac().getArrayListLote().get(0).getPreco());
-			//System.out.println(app.getPersistenceFac().executeSQL("select * from lotexproduto"));
-			System.out.println(f.getArrayListLoteXProd().get(0));
-			//			ArrayList<Integer> e = app.getPersistenceFac().getArrayListLoteXProd();
-			////			
-			//			for(int i : e){
-			//				System.out.println(i);
-			//			}
 
 		} catch (DaoException w ) {
 			// TODO Auto-generated catch block

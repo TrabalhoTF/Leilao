@@ -31,13 +31,11 @@ public class LeilaoDAO  extends DerbyDAO implements LeilaoDAOInterface{
 	}
 
 	@Override
-	public Leilao getById(String id) throws DaoException {
+	public Leilao getById(int idLeilao) throws DaoException {
 		try {
-			for (Lote i : this.getContentTable()) {
-
-				if (i.getId_lote() == Integer.valueOf(idLote)) {
-					Lote loteRetur = (Lote) i;
-					return i;
+			for (Leilao i : this.getContentTable()) {
+				if (i.getId_leilao() == Integer.valueOf(idLeilao)) {
+						return i;
 				}
 			}
 		} catch (Exception e) {
