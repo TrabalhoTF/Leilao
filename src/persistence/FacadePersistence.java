@@ -1,6 +1,11 @@
 package persistence;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Timer;
 
 import business.Lance;
 import business.Leilao;
@@ -56,11 +61,11 @@ public class FacadePersistence {
 	public ArrayList<Leilao> getArrayListLeilao() throws DaoException{
 		return this.leilaoDAO.getContentTable();
 	}
-	
+
 	public Leilao getLeilaoById(int idLeilao) throws DaoException{
 		return this.leilaoDAO.getById(idLeilao);
 	}	
-	
+
 	public ArrayList<Usuario> getArrayListUsers() throws DaoException{		
 		return this.usuarioDAO.getContentTable();
 	}
@@ -80,16 +85,16 @@ public class FacadePersistence {
 	public ArrayList<Integer> getByIdArrayListLoteXProd(int idLotexProd) throws DaoException{
 		return this.lotexprod.getById(idLotexProd);
 	}
-	
-		
+
+
 	public Produto getProdById(int idProd){
 		return this.produtoDAO.getById(idProd);
 	}
-	
+
 	public Usuario getUserById(String cpfCnpj) throws DaoException{
 		return this.usuarioDAO.getById(cpfCnpj);
 	}
-	
+
 	public Lote getLoteById(int idLote) throws DaoException{
 		return this.loteDAO.getById(idLote);
 	}
@@ -97,5 +102,4 @@ public class FacadePersistence {
 	public Lance getLanceById(int idLance) throws DaoException{
 		return this.lanceDAO.getById(idLance);	
 	}
-
 }

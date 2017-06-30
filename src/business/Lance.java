@@ -1,9 +1,12 @@
 package business;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Lance {
 	private int idLance;
-	private String hora;
-	private String data;
+	private LocalTime hora;
+	private LocalDate data;
 	private String cpf_cnpj;	
 	private int idLeilao;
 	private float valor;
@@ -26,7 +29,7 @@ public class Lance {
 
 ;
 	
-	public Lance(String cpf_cnpj, int idLeilao, String data, String hora, float valor){
+	public Lance(String cpf_cnpj, int idLeilao, LocalDate data, LocalTime hora, float valor){
 		setIdLeilao(idLeilao);
 		setData(data);
 		setHora(hora);
@@ -34,7 +37,7 @@ public class Lance {
 		setValor(valor);		
 	}
 	
-	public Lance(int idLance, int idLeilao, String cpf_cnpj, String data, String hora, float valor){
+	public Lance(int idLance, int idLeilao, String cpf_cnpj, LocalDate  data, LocalTime hora, float valor){
 		setIdLeilao(idLeilao);
 		setIDLance(idLance);
 		setData(data);
@@ -55,19 +58,19 @@ public class Lance {
 		this.cpf_cnpj = cpf_cnpj;
 	}
 
-	public String getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
-	public String getHora() {
+	public LocalTime getHora() {
 		return hora;
 	}
 
-	public void setHora(String hora) {
+	public void setHora(LocalTime hora) {
 		this.hora = hora;
 	}
 
@@ -121,35 +124,35 @@ public class Lance {
 		
 		
 		
-		a = (int)   (Integer.parseInt(getData().substring(0, 2)) +
-					Integer.parseInt(getData().substring(3, 5)) + 
-					Integer.parseInt(getData().substring(6, 10)) +
-		       
-					Integer.parseInt(getHora().substring(0, 2)) +
-					Integer.parseInt(getHora().substring(3, 5)) +
-		     
-					getValor());
+//		a = (int)   (Integer.parseInt(getData().substring(0, 2)) +
+//					Integer.parseInt(getData().substring(3, 5)) + 
+//					Integer.parseInt(getData().substring(6, 10)) +
+//		       
+//					Integer.parseInt(getHora().substring(0, 2)) +
+//					Integer.parseInt(getHora().substring(3, 5)) +
+//		     
+//					getValor());
 				
 								
 		return a*b*37;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		boolean aux = false;
-
-		if(obj instanceof Lance){
-			if(((Lance) obj).getData().equalsIgnoreCase(this.getData())){
-				if(((Lance) obj).getHora().equalsIgnoreCase(this.getHora())){
-					if(((Lance) obj).getValor() == this.getValor()){
-						aux = true;							
-					}						
-				}					
-			}				
-		}	
-		return aux;
-	}
-	
+//	@Override
+//	public boolean equals(Object obj) {
+//		boolean aux = false;
+//
+//		if(obj instanceof Lance){
+//			if(((Lance) obj).getData().equalsIgnoreCase(this.getData())){
+//				if(((Lance) obj).getHora().equalsIgnoreCase(this.getHora())){
+//					if(((Lance) obj).getValor() == this.getValor()){
+//						aux = true;							
+//					}						
+//				}					
+//			}				
+//		}	
+//		return aux;
+//	}
+//	
 	
 
 }
