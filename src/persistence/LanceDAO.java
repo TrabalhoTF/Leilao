@@ -39,9 +39,9 @@ public class LanceDAO extends DerbyDAO implements LanceDAOInterface {
 		}	return null;
 	}
 
+     
 
-
-	Lance  l = new Lance(idLance, idLeilao, cpf_cnpj, data, hora, valor)
+	Lance  l = new Lance(idLance, idLeilao, cpf_cnpj, data, hora, valor);
 			//			
 			//			CREATE TABLE LANCE(
 			//					ID_LANCE INT NOT NULL PRIMARY KEY,

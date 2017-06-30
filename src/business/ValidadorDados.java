@@ -6,8 +6,14 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 public class ValidadorDados { 
-	public static boolean validarEmail(String email){
-		return email.contains("@");		
+	public static String validarEmail(String email){
+		String aux = null;
+		
+		if(email.contains("@")){
+			aux = email;			
+		}
+		
+		return aux;		
 	}
 	
 	public static boolean validarId(int id){
@@ -43,8 +49,8 @@ public class ValidadorDados {
 	    } 		
 	}
 	
-	public static boolean validarCpfCnpj(String cpf){
-		boolean aux = false;
+	public static String validarCpfCnpj(String cpf){
+		String aux = null;
 		int cont = 0;
 		
 		
@@ -76,11 +82,11 @@ public class ValidadorDados {
 		//System.out.println(cpf.substring(2,3)+" "+cpf.substring(6,7)+" "+ cpf.substring(10,11)+" "+cpf.substring(15,16)+" ");
 		
 		if(cont == 11){
-			aux = true;			
+			aux = cpf;			
 		}
 		
 		if(cont == 14){
-			aux = true;			
+			aux = cpf;			
 		}
 		
 		

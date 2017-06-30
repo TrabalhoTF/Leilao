@@ -9,10 +9,12 @@ import business.Lance;
 public class TestLance {
 	private Lance lance;
 	
+	
+	//int idLance, int idLeilao, String cpf_cnpj, String data, String hora, float valor
 
 	@Before
 	public void setUp() {
-		lance = new Lance("999.999.999-99", "12/12/2222", "23:59", 999999999.999f);
+		lance = new Lance(12345, 5555, "999.999.999-99", "12/12/2222", "23:59", 999999999.999f);
 	}
 
 	@Test
@@ -29,13 +31,13 @@ public class TestLance {
 	
 	@Test
 	public void testEqualsObjectTrue() {
-		Lance lance2 = new Lance("999.999.999-99","12/12/2222", "23:59", 999999999.999f);		
+		Lance lance2 = new Lance(12345, 5555, "999.999.999-99", "12/12/2222", "23:59", 999999999.999f);	
 		assertTrue(lance.equals(lance2));
 	}
 	
 	@Test
 		public void testEqualsObjectFalse() {
-			Lance lance2 = new Lance("999.999.999-99", "12/12/2222", "23:58", 999999999.999f);		
+			Lance lance2 = new Lance(12345, 5555, "999.999.999-99", "12/12/2222", "23:59", 999999999.999f);
 			assertFalse(lance.equals(lance2));
 		}
 

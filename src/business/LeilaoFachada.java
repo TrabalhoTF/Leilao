@@ -5,31 +5,16 @@ import java.util.HashMap;
 
 import persistence.DaoException;
 import persistence.FacadePersistence;
+import sun.nio.cs.US_ASCII;
 
 public class LeilaoFachada { 
 	
-	
-	private ArrayList<Usuario> listaUsuarios;
-	private ArrayList<Produto> listaProdutos;
-	private ArrayList<Lote> listaLote;
-	private ArrayList<Leilao> listaLeilao;
-	
-	private FacadePersistence fachadaDao;
-	
-	private HashMap<Integer, Lote> mapId_leilaoLote;
+	private FacadePersistence fachadaDao;	
 	
 	
-	public LeilaoFachada() throws LeilaoException{	
-		
+	public LeilaoFachada() throws LeilaoException{			
 		try {
 			fachadaDao = new FacadePersistence();
-			
-			listaUsuarios = new ArrayList<Usuario>();
-			listaProdutos = new ArrayList<Produto>();
-			listaLote = new ArrayList<Lote>();		
-			listaLeilao = new ArrayList<Leilao>();
-			
-			mapId_leilaoLote = new HashMap<Integer, Lote>();
 			
 		} catch (DaoException e) {
 			throw new LeilaoException("ERRO AO CRIAR A FACHADA!", e);
@@ -38,216 +23,151 @@ public class LeilaoFachada {
 		
     }
 	
-	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException {
-		Usuario usuario = null;
-		int cont = 0;
-		boolean aux = false;
-
-		if(ValidadorDados.validarEmail(email)){
-			cont = cont +1;			
-		}else{
-			throw new LeilaoException("Email invalido");				
-		}
-
-		if(ValidadorDados.validarCpfCnpj(cnpj_cpf)){
-			cont = cont +1;
-		}else{
-			throw new LeilaoException("CPF/CNPJ invalido");
-		}
-
-		if(cont == 2){	
-			for(Usuario user: listaUsuarios){
-				if(user.getCnpj_cpf().equalsIgnoreCase(cnpj_cpf)){
-					cont = cont +1;	
-				} 
-			}	
-		}else {
-			throw new LeilaoException("Usuário já cadastrado!");
-		}
-
-		if(cont == 2){			
-			try {
-				fachadaDao.addUser(usuario);
-			} catch (DaoException e) {
-				throw new LeilaoException("Erro ao cadastrar usuario! ", e);
+	// Cria um usuario e adiciona ele no BD
+	
+	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException, DaoException {
+		
+		String cnpj_cpfValido = ValidadorDados.validarCpfCnpj(cnpj_cpf);
+		String emailValido = ValidadorDados.validarEmail(email);
+		
+		if(cnpj_cpf != null){
+			if(emailValido != null){
+				Usuario user = new Usuario(cnpj_cpfValido, nome, emailValido);
+						
+					System.out.println("FAlta implementar metodo no cadastrar usuario");		
+				
+				fachadaDao.addUser(user);
+			} else{
+				new LeilaoException("E-mail invalido!"); 
 			}
-			
-			usuario = new Usuario(cnpj_cpf, nome, email);
-			aux = true;
-		} 
-
-		return aux;
-	}
-
-	public ArrayList<Usuario> getListaUsuario() throws Exception{
-		try {
-			return fachadaDao.getArrayUsers();
-		} catch (DaoException e) {
-			throw new LeilaoException("Erro ao cadastrar usuario! ", e);
+		} else {
+			new LeilaoException("CPF/CNPJ invalido!"); 
 		}
+		
+		return false;
 	}
-
+	
+	//Retorna uma lista com todos os usuarios
+	public ArrayList<Usuario> getListaTodosUsuarios() throws DaoException{
+		ArrayList<Usuario> listaUsuarios = fachadaDao.getArrayListUsers();
+		
+		if(listaUsuarios == null){
+			new DaoException("Não foi possivel gerar a lista com todos os usuarios cadastrados no BD!")	;					
+		}
+		return listaUsuarios;
+	}
+	
+	// Retorna um usuario apartir do seu CPF ou CNPJ	
+	public Usuario buscaUsuarioCPF(String cpf){
+		
+		return null;		
+	}
+	
+	// Cria produto e adiciona no BD
 	public boolean cadastrarProduto(int id_produto, Categoria categ, String descBreve, String descCompleta) throws DaoException{		
 		Produto produto = new Produto(id_produto, categ, descBreve, descCompleta);			
 		
 		return fachadaDao.addProd(produto);	
 	}
 	
-	public boolean criarLoteAdtibuirLeilao(int id_leilao, int id_lote, float preco) throws LeilaoException{
-		Lote lote;
-		boolean aux = false;
-		if(ValidadorDados.validarValor(preco)){
-			lote = new Lote(id_lote, preco);
-			aux = listaLote.add(lote);
-			
-			if(mapId_leilaoLote.containsKey(id_leilao)== false){
-				mapId_leilaoLote.put(id_leilao, lote);
-				
-				try {
-					fachadaDao.addLote(lote);
-				} catch (DaoException e) {
-					throw new LeilaoException("Erro ao cadastrar usuario! ", e);
-				}
-				
-				aux = true;
-			}else{
-				new LeilaoException("Já existe um lote cadastrado para esse leilao!");
-			}	
-			
-		}else{
-			new LeilaoException("Lote não cadastrado! Atribuia a ele um valor válido!");
-		}				
-					
-		return aux;		
+	//Retorna uma lista com os produtos cadastrados
+	public ArrayList<Produto> listaProdutos() throws DaoException{
+		ArrayList<Produto> listaProdutos = fachadaDao.getArrayListProd();
+		
+		if(listaProdutos == null){
+			new DaoException("Não foi possivel gerar a lista com todos os produtos cadastrados no BD!")	;		
+		}
+		
+		return listaProdutos;
 	}
 	
-	public HashMap<Integer, Lote> getMapId_leilaoLote(){
-		return mapId_leilaoLote;
-	}
-	
-	public boolean adicionarProdutoLote( int id_leilao, int id_lote, int id_produto ) throws LeilaoException{
-		boolean aux = false;
-		Produto prodAux = null;
-		for(Lote lo: listaLote){
-			if(lo.getId_lote() == id_lote){
-				for(Produto prod :listaProdutos){
-					if(prod.getId_produto() == id_produto){
-						prodAux = prod;
-						lo.addProdduto(prod);
-					}					
-				}
-
+	// Retorna um produto apartir do id de produto informado	
+	public Produto buscaProdutoId(int id_produto) throws DaoException{		
+		Produto aux = null; 
+		
+		ArrayList<Produto> lista= listaProdutos();
+		for(int i = 0; i < lista.size(); i++){
+			if(lista.get(i).getId_produto() == id_produto){
+				aux = lista.get(i);				
 			}			
-		}		
-
-		
-		if(prodAux == null){
-			new LeilaoException("Produto não encontrado!");
-		} else {
-			if(mapId_leilaoLote.containsKey(id_leilao)){	
-				mapId_leilaoLote.get(id_leilao).addProdduto(prodAux);		
-				aux = true;
-			} else {
-				new LeilaoException("Leilão não encontrado!");
-			}
 		}
+		
 		return aux;		
-	}	
+	}
 	
-	public boolean criarLeilao(int id_leilao, boolean tipo, boolean ativo, String cpf_cnpj, String data_inicio,String data_fim) {
+	//cria um lote 
+	public boolean cadastrarLote(int id_lote, float valor) throws DaoException{
 		boolean aux = false;
-		int cont = 0;		
-		Usuario usuarioAux= null;		
 		
-		for(Usuario usu: listaUsuarios){
-			if(usu.getCnpj_cpf().equalsIgnoreCase(cpf_cnpj)){
-				usuarioAux = usu;	
-			}
-		}
-		
-		if(ValidadorDados.compararDatas(data_inicio, data_fim) == 1){
-			cont = cont +1;						
-		}else if(ValidadorDados.compararDatas(data_inicio, data_fim) == -1){
-			new LeilaoException("Datas invalidas! Data de final não pode ser menor que a data inicial!");			
-		} else{
-			new LeilaoException("Formato invalido para datas!");
-		}
-		
-		if(usuarioAux != null){
-			cont = cont +1;				
-		}else{
-			new LeilaoException("Usuario invalido!");
-		}
-		
-		if(cont == 2){	
-			for(Leilao lei: listaLeilao){
-				if(lei.getId_leilao()== id_leilao){
-					cont = 0;					
-				}				
-			}
-		}
-		
-		
-		if(cont == 2){
-			aux = true;
-			Leilao leilaoAux = new Leilao(id_leilao, tipo, ativo, usuarioAux, data_inicio, data_fim);	
-			listaLeilao.add(leilaoAux);
+		if(ValidadorDados.validarValor(valor)){
+			
+			Lote lote = new Lote(id_lote, valor);
+			
+			
+			if(fachadaDao.addLote(lote) == false){
+				throw new DaoException("Não foi possivel cadastrar o lote no BD!");				
+			} else {
+				aux = true;
+			}			
+						
 		} else {
-			new LeilaoException("Leilao já existente!");
-		}					
+			new LeilaoException("Não criar o lote!")	;
+		}
+		
+		return aux;		
+	}
+	
+	// Retorna uma lista com os lotes
+	public ArrayList<Lote> getListaLotes() throws DaoException{
+		ArrayList<Lote> lista = fachadaDao.getArrayListLote();		
+		return lista;
+	}
+	
+	// busca um lote pelo id
+	public Lote buscaLotePorId(int id_lote) throws DaoException{
+		Lote aux = fachadaDao.getLoteById(id_lote);
+		
+		if(aux == null){
+			throw new DaoException("Não foi possivel encontrar o lote no BD!");				
+		}
+		
 		return aux;
 	}
 	
-	// gera uma lista de acordo com os parametros escolhidos
-	// se tipo = false leilao por demanda
-	// se tipo = true leilao comum
-	// se ativo = true leilao ativo
-	// se ativo = false leilao encerrado
-	public ArrayList<Leilao> getListaAtivosTipo(boolean tipo, boolean ativo){
+	// Adiciona um produto ao lote
+	public boolean adicionarProdutoLote(int id_lote, int id_produto) throws DaoException{
+		Lote lote = buscaLotePorId(id_lote);
+		Produto prod = buscaProdutoId(id_produto);
 		
-		ArrayList<Leilao> listaTipoAtivo = new ArrayList<Leilao>();
+		boolean aux = false;
 		
-		
-		if(listaLeilao.size() > 0){			
-			if(tipo == true){
-				if(ativo == true){
-					
-					for(Leilao lei: listaLeilao){							
-						if(lei.isAtivo() == true ){
-							System.out.println(lei.isTipo());
-							listaTipoAtivo.add(lei);	
-						}
-					}
-				} else {
-					for(Leilao lei: listaLeilao){
-						if(lei.isAtivo() == false ){
-							listaTipoAtivo.add(lei);	
-						}
-					}
-
-				}
-			}else{	// tipo = false			
-					if(ativo == true){
-						for(Leilao lei: listaLeilao){							
-							if(lei.isAtivo() == true ){
-								listaTipoAtivo.add(lei);	
-							}
-						}
-					} else { //ativo = false
-						for(Leilao lei: listaLeilao){
-							if(lei.isAtivo() == false ){
-								listaTipoAtivo.add(lei);	
-							}
-						}
-
-					}	
+		if(lote != null){
+			if(prod != null){
+				buscaLotePorId(id_lote).addProdduto(buscaProdutoId(id_produto));
+				aux = true;
 				
-			}
-		} else {
-			new LeilaoException("Não há leilões cadastrados!");
-		}				
+				fachadaDao.addLoteXProduto(id_lote, id_produto);
+				
+			} else{
+				new DaoException("Não foi possivel encontrar o produto no BD!")	;
+			}		
+						
+		}else{
+			new DaoException("Não foi possivel encontrar o lote no BD!");
+		}
 		
-		return listaTipoAtivo;
-
+		return aux;
 	}
+	
+	
+	// retorna uma lista de produtos apartir do id do lote
+	public ArrayList<Produto> buscaListaProdutosIdLote(int id_lote ) throws DaoException{
+		ArrayList<Produto> listaProd = fachadaDao.getArrayListProd();
+		ArrayList<Integer> listaIdProduto = fachadaDao.getArrayListLoteXProd();
+		ArrayList<Produto> listaProdFinal = new ArrayList<Produto>();
+		
+		
+
+		return null;
+	}	
 }
