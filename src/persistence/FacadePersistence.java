@@ -79,5 +79,25 @@ public class FacadePersistence {
 	public ArrayList<Integer> getByIdArrayListLoteXProd(int idLotexProd) throws DaoException{
 		return this.lotexprod.getById(idLotexProd);
 	}
+	
+	public Leilao getLeilaoById(int idLeilao){
+		return this.leilaoDAO.getById(idLeilao);
+	}
+	
+	public Produto getProdById(int idProd){
+		return this.produtoDAO.getById(idProd);
+	}
+	
+	public Usuario getUserById(String cpfCnpj){
+		return this.usuarioDAO.getById(cpfCnpj);
+	}
+	
+	public Lote getLoteById(int idLote){
+		return this.loteDAO.getById(idLote);
+	}
+	
+	public Lance getLanceById(int idLance){
+		return this.lanceDAO.getById(idLance);	
+	}
 
 }
