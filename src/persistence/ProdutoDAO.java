@@ -28,9 +28,9 @@ public class ProdutoDAO extends DerbyDAO implements ProdutoDAOInteface {
 	}
 
 	@Override
-	public Produto getById(String idProd){
+	public Produto getById(int idProd){
 		for(Produto i : this.getContentTable() ){
-			if(i.getId_produto() == Integer.valueOf(idProd)){
+			if(i.getId_produto() == idProd){
 				Produto prodRetur =  i;
 				return i;		
 			}			
