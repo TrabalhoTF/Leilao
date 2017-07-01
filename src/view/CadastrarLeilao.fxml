@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="674.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="cadastroLeilao" prefHeight="674.0" prefWidth="850.0" style="-fx-background-color: brown;">
+         <children>
+            <Label layoutX="62.0" layoutY="55.0" prefHeight="26.0" prefWidth="73.0" text="Usuario">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="33.0" layoutY="97.0" prefHeight="26.0" prefWidth="100.0" text="Data inicio">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="379.0" layoutY="97.0" prefHeight="26.0" prefWidth="79.0" text="Data fim">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <Button layoutX="19.0" layoutY="616.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="176.0" text="Cadastrar Leilão">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Separator layoutX="14.0" layoutY="207.0" prefHeight="17.0" prefWidth="805.0" />
+            <Label layoutX="81.0" layoutY="12.0" prefHeight="26.0" prefWidth="45.0" text="Tipo">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <ComboBox layoutX="143.0" layoutY="7.0" prefHeight="36.0" prefWidth="176.0" />
+            <DatePicker layoutX="145.0" layoutY="92.0" prefHeight="36.0" prefWidth="176.0" />
+            <DatePicker layoutX="480.0" layoutY="90.0" prefHeight="36.0" prefWidth="176.0" />
+            <ComboBox layoutX="143.0" layoutY="50.0" prefHeight="36.0" prefWidth="176.0" />
+            <TextField layoutX="181.0" layoutY="367.0" prefHeight="36.0" prefWidth="176.0" />
+            <Label layoutX="112.0" layoutY="235.0" prefHeight="26.0" prefWidth="185.0" text="Cadastro de produtos">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <TextField layoutX="181.0" layoutY="418.0" prefHeight="36.0" prefWidth="176.0" />
+            <Label layoutX="120.0" layoutY="423.0" prefHeight="26.0" prefWidth="51.0" text="Preço">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <Button layoutX="20.0" layoutY="549.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="269.0" text="Aciocionar produto ao lote">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Separator layoutX="14.0" layoutY="599.0" prefHeight="8.0" prefWidth="813.0" />
+            <Slider blockIncrement="1.0" layoutX="155.0" layoutY="159.0" max="24.0" min="1.0" prefHeight="7.0" prefWidth="140.0" showTickMarks="true" snapToTicks="true" value="1.0" />
+            <Slider blockIncrement="1.0" layoutX="155.0" layoutY="183.0" max="59.0" prefHeight="7.0" prefWidth="140.0" showTickMarks="true" snapToTicks="true" />
+            <Label layoutX="223.0" layoutY="140.0" text=":">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="197.0" layoutY="137.0" mouseTransparent="true" prefHeight="36.0" prefWidth="28.0" text="00">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="233.0" layoutY="137.0" mouseTransparent="true" prefHeight="36.0" prefWidth="28.0" text="00">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="158.0" prefHeight="26.0" prefWidth="100.0" text="Hora inicio">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <Slider blockIncrement="1.0" layoutX="498.0" layoutY="161.0" max="24.0" min="1.0" prefHeight="7.0" prefWidth="140.0" showTickMarks="true" snapToTicks="true" value="1.0" />
+            <Slider blockIncrement="1.0" layoutX="498.0" layoutY="185.0" max="59.0" prefHeight="7.0" prefWidth="140.0" showTickMarks="true" snapToTicks="true" />
+            <Label layoutX="537.0" layoutY="138.0" mouseTransparent="true" prefHeight="36.0" prefWidth="28.0" text="00">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="567.0" layoutY="137.0" mouseTransparent="true" prefHeight="36.0" prefWidth="28.0" text="00">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="371.0" layoutY="160.0" prefHeight="26.0" prefWidth="100.0" text="Hora Fim">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <RadioButton layoutX="500.0" layoutY="59.0" mnemonicParsing="false" selected="true" text="Aberto">
+               <toggleGroup>
+                  <ToggleGroup fx:id="forma" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton layoutX="577.0" layoutY="59.0" mnemonicParsing="false" text="Fechado" toggleGroup="$forma" />
+            <Label layoutX="329.0" layoutY="55.0" prefHeight="26.0" prefWidth="140.0" text="Forma de lance">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="372.0" prefHeight="26.0" prefWidth="140.0" text="Descrição Breve">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="216.0" prefHeight="52.0" prefWidth="100.0" text="-Lote-">
+               <font>
+                  <Font name="Bell MT Italic" size="38.0" />
+               </font>
+            </Label>
+            <Label layoutX="401.0" layoutY="281.0" prefHeight="26.0" prefWidth="185.0" text="Descrição Completa">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="403.0" layoutY="316.0" prefHeight="282.0" prefWidth="415.0" wrapText="true" />
+            <ComboBox layoutX="181.0" layoutY="316.0" prefHeight="36.0" prefWidth="176.0" />
+            <Label layoutX="80.0" layoutY="319.0" prefHeight="30.0" prefWidth="89.0" text="Categoria">
+               <font>
+                  <Font name="Bell MT Italic" size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="563.0" layoutY="140.0" text=":">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

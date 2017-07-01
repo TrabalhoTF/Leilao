@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import business.LeilaoException;
 
@@ -141,7 +142,7 @@ public class DerbyDAO implements DAO {
 	}
 
 	public static void main(String[] args) throws DaoException, LeilaoException {		
-
+				System.out.println(LocalDate.now());
 	}
 
 }

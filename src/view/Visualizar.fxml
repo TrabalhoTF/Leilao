@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+   <children>
+      <Pane layoutY="-13.0" prefHeight="411.0" prefWidth="976.0" style="-fx-background-color: brown;">
+         <children>
+            <TableView layoutY="14.0" prefHeight="398.0" prefWidth="980.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="ID Leilão" />
+                <TableColumn prefWidth="75.0" text="Autor" />
+                  <TableColumn prefWidth="75.0" text="Data inicio" />
+                  <TableColumn prefWidth="75.0" text="Hora inicio" />
+                  <TableColumn prefWidth="75.0" text="Data Fim" />
+                  <TableColumn prefWidth="75.0" text="Hora Fim" />
+                  <TableColumn prefWidth="75.0" text="Valor lote" />
+                  <TableColumn prefWidth="102.0" text="Forma de lance" />
+                  <TableColumn prefWidth="48.0" text="Status" />
+                  <TableColumn prefWidth="105.0" text="Qtd participantes" />
+                  <TableColumn prefWidth="45.0" text="Tipo" />
+                  <TableColumn prefWidth="75.0" text="Ganhador" />
+                  <TableColumn prefWidth="75.0" text="Valor lance" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

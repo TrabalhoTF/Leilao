@@ -15,38 +15,68 @@ import javafx.event.ActionEvent;
 
 
 public class MenuLeilao {
-	@FXML private MenuBar menuCadastraFuncionario;
 
 	public MenuLeilao() {
 	}
 
-	@Action
 	public void openCadastrarUsuario(ActionEvent event){
 		try{
 			Stage stage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("CadastroFuncionario.fxml"));
-			stage.setTitle("Rent a Thing - Cadastrando novo Funcionario");
-			stage.setScene(new Scene(root, 400, 530));
-			stage.setX(350);
-			stage.setY(-5);
+			Parent root = FXMLLoader.load(getClass().getResource("CadastrarUsuario.fxml"));
+			stage.setTitle("Cadastro de Usuário");
+			stage.setScene(new Scene(root, 370, 232));
 			stage.show();
 		} catch (Exception e){
 			System.out.println(e);
 		}
 	}
-
-	@Action
-	public void openCadastrarEquipamento(ActionEvent event){
+	
+	public void openCadastrarLeilao(ActionEvent event){
 		try{
 			Stage stage = new Stage();
-			Parent root = FXMLLoader.load(getClass().getResource("CadastroEquipamento.fxml"));
-			stage.setTitle("Rent a Thing - Cadastrando novo Equipamento");
-			stage.setScene(new Scene(root, 400, 600));
-			stage.setX(350);
-			stage.setY(-5);
+			Parent root = FXMLLoader.load(getClass().getResource("CadastrarLeilao.fxml"));
+			stage.setTitle("Cadastro de Leilão");
+			stage.setScene(new Scene(root, 850, 670));
 			stage.show();
 		} catch (Exception e){
 			System.out.println(e);
 		}
 	}
+	
+	public void openCadastrarLance(ActionEvent event){
+		try{
+			Stage stage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("CadastrarLance.fxml"));
+			stage.setTitle("Cadastro de Lance");
+			stage.setScene(new Scene(root, 370, 210));
+			stage.show();
+		} catch (Exception e){
+			System.out.println(e);
+		}
+	}
+	
+	public void openCancelarLance(ActionEvent event){
+		try{
+			Stage stage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("CancelarLance.fxml"));
+			stage.setTitle("Canlemaneto de Lance");
+			stage.setScene(new Scene(root, 370, 170));
+			stage.show();
+		} catch (Exception e){
+			System.out.println(e);
+		}
+	}
+	
+	public void openVisualizar(ActionEvent event){
+		try{
+			Stage stage = new Stage();
+			Parent root = FXMLLoader.load(getClass().getResource("Visualizar.fxml"));
+			stage.setTitle("Visualização de Leilões");
+			stage.setScene(new Scene(root, 977, 390));
+			stage.show();
+		} catch (Exception e){
+			System.out.println(e);
+		}
+	}
+	
 }

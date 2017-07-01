@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="226.0" prefWidth="374.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<AnchorPane prefHeight="226.0" prefWidth="374.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="1.0" prefHeight="229.0" prefWidth="373.0" style="-fx-background-color: brown;">
          <children>
@@ -31,7 +30,7 @@
                   <Font name="Bell MT Italic" size="22.0" />
                </font>
             </Label>
-            <Button fx:id="CadastrarUsuario" layoutX="35.0" layoutY="174.0" mnemonicParsing="false" onAction="#CadastrarUsuario" prefHeight="36.0" prefWidth="132.0" text="Cadastrar">
+            <Button fx:id="menuCadastraFuncionario" layoutX="35.0" layoutY="174.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" text="Cadastrar">
                <font>
                   <Font size="20.0" />
                </font>
