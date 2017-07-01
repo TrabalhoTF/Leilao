@@ -1,7 +1,8 @@
 package business;
 
+
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Leilao {
 	private int id_leilao;
@@ -9,7 +10,8 @@ public class Leilao {
 								// coloquei na persistencia para aceitar true
 								// para demanda e false para oferta
 	private Usuario principal;
-	private LocalDate data_inicio, data_fim;
+	LocalDate data_inicio;
+	private LocalDate data_fim;
 	private Lote lote;
 
 	public Leilao(int id_leilao, Lote lote, boolean tipo, boolean ativo, Usuario principal, LocalDate data_inicio, LocalDate data_fim) {
@@ -23,7 +25,7 @@ public class Leilao {
 		this.data_fim = data_fim;
 	}
 
-	public Leilao(boolean tipo, boolean ativo, Lote lote, Usuario principal, LocalDate data_inicio,	LocalDate data_fim) {
+	public Leilao(boolean tipo, boolean ativo, Lote lote, Usuario principal, LocalDate data_inicio,LocalDate data_fim) {
 		super();
 		this.lote = lote;
 		this.id_leilao = 0;
@@ -32,7 +34,6 @@ public class Leilao {
 		this.principal = principal;
 		this.data_inicio = data_inicio;
 		this.data_fim = data_fim;
-		;
 	}
 
 	public Lote getLote() {

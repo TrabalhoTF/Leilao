@@ -65,16 +65,4 @@ public class Lote {
 		return produtos;		
 	}
 	
-	@Override
-	public int hashCode()	{
-		return getId_lote() * 37;
-	}
-	
-	@Override
-	public boolean equals(Object lote){
-		if ((lote instanceof Lote) && ((Lote) lote).getId_lote() == (this.getId_lote())){
-			return true;
-		}else
-			return false;
-	}
 }

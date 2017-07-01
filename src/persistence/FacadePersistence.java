@@ -14,7 +14,7 @@ import business.Produto;
 import business.Usuario;
 import sun.security.jca.GetInstance;
 
-public class FacadePersistence {
+public class FacadePersistence implements business.FacadePersistenceDao{
 
 
 	private LoteDAO loteDAO = new LoteDAO();
@@ -101,5 +101,9 @@ public class FacadePersistence {
 	
 	public Lance getLanceById(int idLance) throws DaoException{
 		return this.lanceDAO.getById(idLance);	
+	}
+	
+	public boolean addLeilao(Leilao leilao) throws DaoException{
+		return leilaoDAO.add(leilao);		
 	}
 }

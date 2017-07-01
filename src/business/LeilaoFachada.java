@@ -24,8 +24,7 @@ public class LeilaoFachada {
 		
     }
 	
-	// Cria um usuario e adiciona ele no BD
-	
+	// Cria um usuario e adiciona ele no BD	
 	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException, DaoException {
 		
 		String cnpj_cpfValido = ValidadorDados.validarCpfCnpj(cnpj_cpf);
@@ -59,9 +58,14 @@ public class LeilaoFachada {
 	}
 	
 	// Retorna um usuario apartir do seu CPF ou CNPJ	
-	public Usuario buscaUsuarioCPF(String cpf){
+	public Usuario buscaUsuarioCPF(String cpf) throws DaoException{
 		
-		return null;		
+		Usuario aux = fachadaDao.getUserById(cpf);
+		
+		if(aux == null){
+			new LeilaoException("Não foi possivel encontrar um usuario com este CPF/CNPJ!"); 
+		}		
+		return aux;		
 	}
 	
 	// Cria produto e adiciona no BD
@@ -173,14 +177,24 @@ public class LeilaoFachada {
 	
 	// Ativo: true para se esta ativo
 	//        false para terminado
-	public boolean cadastrarLeilao(boolean tipo, boolean ativo, Lote lote, Usuario principal, LocalDate data_inicio, LocalDate data_fim){
-		
-		Leilao leilao = new Leilao(tipo, ativo, lote, principal, data_inicio, data_fim);
-		
-		// Falata adicionar o leilão no banco de dados;
-		//fachadaDao		
-		
+	public boolean cadastrarLeilao(boolean tipo, boolean ativo, Lote lote, Usuario principal, LocalDate data_inicio, LocalDate data_fim) throws LeilaoException, DaoException{		
+		if(ValidadorDados.compararDatas(data_inicio, data_fim) == 0){
+			throw new LeilaoException("As datas de inicio e fim para o leilão devem ser diferentes!");
+		} else if(ValidadorDados.compararDatas(data_inicio, data_fim) == -1){
+			throw new LeilaoException("A data de inicio do leilão não pode ser posterior a data de fim do leilão!");			
+		} else {
+			Leilao leilao = new Leilao(tipo, ativo, lote, principal, data_inicio, data_fim);	
+			fachadaDao.addLeilao(leilao);
+		}
 		
 		return false;
+	}
+	
+	// retorna o lote apartir do id do leilao
+	public Lote retornaLoteIdLeilao(int id_leilao){
+		
+		
+		
+		return null;
 	}
 }

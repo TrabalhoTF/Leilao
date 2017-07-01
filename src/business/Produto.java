@@ -52,17 +52,4 @@ public class Produto {
 		this.id_produto = id_produto;
 	}
 	
-	@Override
-	public int hashCode()	{
-		return getId_produto() * 37;
-	}
-	
-	@Override
-	public boolean equals(Object produto){
-		if ((produto instanceof Produto) && ((Produto) produto).getId_produto() == (this.getId_produto())){
-			return true;
-		}else
-			return false;
-	}
-	
 }

@@ -25,9 +25,9 @@ public class LeilaoDAO  extends DerbyDAO implements LeilaoDAOInterface{
 			ps.executeUpdate();
 			ps.close();
 		}catch(SQLException e){		
-			throw new DaoException("Não foi possível completar a inserção, revisar o objeto informado: "+e.getMessage());
+			throw new DaoException("Não foi possível inserir leilao : "+e.getMessage());
 		}		
-		System.out.println("Produto inserido com sucesso!");
+		System.out.println("Leilão inserido com sucesso!");
 		return true;
 	}
 
