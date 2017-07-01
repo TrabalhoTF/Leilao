@@ -1,6 +1,4 @@
 /business/
+/persistence/
 /unitTest/
 /view/
-/persistence/
-/.gitignore
-/UsuarioTableModel/
