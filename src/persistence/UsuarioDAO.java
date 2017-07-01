@@ -14,6 +14,7 @@ public class UsuarioDAO extends DerbyDAO implements UsuarioDAOInterface{
 		try{
 			String sql = "INSERT INTO USUARIO VALUES(?,?,?)";
 			PreparedStatement ps  = DerbyDAO.getConnection().prepareStatement(sql);
+			System.out.println(usr.toString());
 			ps.setInt(1, Integer.valueOf(usr.getCnpj_cpf()));
 			ps.setString(2, usr.getNome());
 			ps.setString(3, usr.getEmail());		

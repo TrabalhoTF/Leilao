@@ -27,23 +27,24 @@ public class LeilaoFachada {
 	// Cria um usuario e adiciona ele no BD	
 	public boolean cadastrarUsuario(String cnpj_cpf, String nome, String email) throws LeilaoException, DaoException {
 		
-		String cnpj_cpfValido = ValidadorDados.validarCpfCnpj(cnpj_cpf);
-		String emailValido = ValidadorDados.validarEmail(email);
+//		String cnpj_cpfValido = ValidadorDados.validarCpfCnpj(cnpj_cpf);
+//		String emailValido = ValidadorDados.validarEmail(email);
 		
-		if(cnpj_cpf != null){
-			if(emailValido != null){
-				Usuario user = new Usuario(cnpj_cpfValido, nome, emailValido);
+//		if(cnpj_cpf != null){
+//			if(emailValido != null){
+//				Usuario user = new Usuario(cnpj_cpfValido, nome, emailValido);
+					Usuario user = new Usuario(cnpj_cpf, nome, email);
 						
-					System.out.println("FAlta implementar metodo no cadastrar usuario");		
-				
+//					System.out.println("FAlta implementar metodo no cadastrar usuario");		
+				System.out.println("na busines "+user.getCnpj_cpf());
 				fachadaDao.addUser(user);
-			} else{
-				new LeilaoException("E-mail invalido!"); 
-			}
-		} else {
-			new LeilaoException("CPF/CNPJ invalido!"); 
-		}
-		
+//			} else{
+//				new LeilaoException("E-mail invalido!"); 
+//			}
+//		} else {
+//			new LeilaoException("CPF/CNPJ invalido!"); 
+//		}
+//		
 		return false;
 	}
 	

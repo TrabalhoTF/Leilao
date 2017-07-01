@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri Jun 30 20:46:25 BRT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-015c-fb66-0296-00000351cfa0 
+Sat Jul 01 03:21:10 BRT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-015c-fccf-6840-0000029318e0 
 on database directory C:\Users\JOO_F\git\Leilao\derbyDB  with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
 Loaded from file:/C:/Users/JOO_F/git/Leilao/derby.jar
 java.vendor=Oracle Corporation
