@@ -13,14 +13,15 @@ import javafx.stage.Stage;
 import javax.xml.ws.Action;
 import javafx.event.ActionEvent;
 
-public class MenuController {
-	@FXML private MenuBar menuCadastro;
 
-	public MenuController() {
+public class MenuLeilao {
+	@FXML private MenuBar menuCadastraFuncionario;
+
+	public MenuLeilao() {
 	}
 
 	@Action
-	public void openCadastrarFuncionario(ActionEvent event){
+	public void openCadastrarUsuario(ActionEvent event){
 		try{
 			Stage stage = new Stage();
 			Parent root = FXMLLoader.load(getClass().getResource("CadastroFuncionario.fxml"));
